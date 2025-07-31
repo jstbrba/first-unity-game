@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
 
+    private float horizontalInput;
     private bool grounded;
 
     private void Awake()
@@ -18,8 +19,16 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        // FLIP CHARACTER
+        if (horizontalInput > 0.01f)
+            transform.localScale = new Vector3(1, 1.5f, 1);
+        else if (horizontalInput < -0.01f)
+            transform.localScale = new Vector3(-1, 1.5f, 1);
+
         // MOVEMENT
-        rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(horizontalInput * movementSpeed, rb.linearVelocity.y);
 
         if (Input.GetKeyDown(KeyCode.W) && isGrounded())
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y + jumpPower);

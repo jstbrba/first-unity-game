@@ -15,19 +15,29 @@ public class EnemyMovement : MonoBehaviour
     private float direction;
 
     private Rigidbody2D body;
+    private Vector3 originalScale;
     private EnemyBehaviour currentBehaviour = EnemyBehaviour.Chasing;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        originalScale = transform.localScale;
     }
     private void Update()
     {
+        // FLIP ENEMY
+        if (player.position.x < transform.position.x)
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+        else
+            transform.localScale = originalScale;
+
+
         behaviourChangeTimer += Time.deltaTime;
         if (behaviourChangeTimer > 2f)  // CHANCE TO CHANGE BEHAVIOUR EVERY 3 SECONDS
             SwitchBehaviour();
 
         direction = Mathf.Sign(player.position.x - transform.position.x);
+
         if (currentBehaviour == EnemyBehaviour.Chasing)
             body.linearVelocity = new Vector2(movementSpeed * direction , body.linearVelocity.y);
         else 

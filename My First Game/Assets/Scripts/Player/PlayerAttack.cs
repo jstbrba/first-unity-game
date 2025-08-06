@@ -11,12 +11,19 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private LayerMask enemyLayer;
 
+    private Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
 
         if (Input.GetMouseButtonDown(0) && cooldownTimer > cooldown)
-            Attack();
+            anim.SetTrigger("attack");
     }
 
     private void Attack()

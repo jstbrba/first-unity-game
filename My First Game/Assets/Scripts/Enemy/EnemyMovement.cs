@@ -15,12 +15,14 @@ public class EnemyMovement : MonoBehaviour
     private float direction;
 
     private Rigidbody2D body;
+    private Animator anim;
     private Vector3 originalScale;
     private EnemyBehaviour currentBehaviour = EnemyBehaviour.Chasing;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         originalScale = transform.localScale;
     }
     private void Update()
@@ -39,9 +41,17 @@ public class EnemyMovement : MonoBehaviour
         direction = Mathf.Sign(player.position.x - transform.position.x);
 
         if (currentBehaviour == EnemyBehaviour.Chasing)
-            body.linearVelocity = new Vector2(movementSpeed * direction , body.linearVelocity.y);
-        else 
-            body.linearVelocity = new Vector2(-movementSpeed * direction , body.linearVelocity.y);
+        {
+            body.linearVelocity = new Vector2(movementSpeed * direction, body.linearVelocity.y);
+            anim.SetFloat("moveDir", 1f);
+            anim.SetBool("walking", true);
+        }
+        else
+        {
+            body.linearVelocity = new Vector2(-movementSpeed * direction, body.linearVelocity.y);
+            anim.SetFloat("moveDir", -1f);
+            anim.SetBool("walking", true);
+        }
     }
     private void SwitchBehaviour()
     {

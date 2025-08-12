@@ -62,6 +62,6 @@ public class EnemyMovement : MonoBehaviour
                 currentBehaviour = EnemyBehaviour.Chasing;
         }
         behaviourChangeTimer = 0;
-        Debug.Log("Behaviour: " + currentBehaviour);
+        //Debug.Log("Behaviour: " + currentBehaviour);
     }
 }

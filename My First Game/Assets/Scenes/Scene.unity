@@ -399,10 +399,10 @@ GameObject:
   - component: {fileID: 1367329061}
   - component: {fileID: 1367329060}
   - component: {fileID: 1367329059}
-  - component: {fileID: 1367329063}
   - component: {fileID: 1367329065}
   - component: {fileID: 1367329064}
   - component: {fileID: 1367329066}
+  - component: {fileID: 1367329067}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -425,7 +425,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -527,7 +527,7 @@ SpriteRenderer:
   m_SortingLayerID: -1512102715
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a0eab7d253b71eb4da06c37990ed949e, type: 3}
   m_Color: {r: 0.5924529, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -535,7 +535,7 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1367329062
@@ -553,24 +553,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1367329063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367329058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ab28f1b4f63bc74eab2b15ea4d3a3f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 10
-  jumpPower: 6
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  enemy: {fileID: 1963597560}
 --- !u!114 &1367329064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +607,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1367329067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367329058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1a91a5cf0f34740b991d7cec70b721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 4
+  jumpPower: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  enemy: {fileID: 1963597560}
+  moveDir: 0
 --- !u!1 &1657587428
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,9 +910,9 @@ GameObject:
   - component: {fileID: 1963597558}
   - component: {fileID: 1963597557}
   - component: {fileID: 1963597556}
-  - component: {fileID: 1963597561}
   - component: {fileID: 1963597562}
   - component: {fileID: 1963597563}
+  - component: {fileID: 1963597564}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -931,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4deea1ba62271454fa32ddfc243d8d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 6
 --- !u!61 &1963597557
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1075,20 +1076,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1963597561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963597555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6e3bb2ce288d346aec55205aae6f17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 1
-  player: {fileID: 1367329062}
 --- !u!114 &1963597562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,6 +1119,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1963597564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963597555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a67f5ac3f0ef3f4a93b209f9fc26296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1
+  player: {fileID: 1367329062}
+  detectionRange: 7.4
+  safeRange: 10.9
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

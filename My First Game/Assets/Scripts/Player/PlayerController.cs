@@ -65,8 +65,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W)) jumpPressed = true;
         if (Input.GetKeyUp(KeyCode.W)) jumpPressed = false;
 
-        Debug.Log(moveDir);
-
         // FLIP CHARACTER TO FACE ENEMY
         facingRight = enemy.position.x > transform.position.x;
         transform.localScale = new Vector3(facingRight ? 1.5f : -1.5f, 1.5f, 1);

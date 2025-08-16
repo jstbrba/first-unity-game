@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         var walkingState = new WalkingState(this, anim);
         var walkingBackState = new WalkingBackState(this, anim);
         var jumpState = new JumpState(this, anim);
+        var attackState = new AttackState(this, anim);
 
         // DEFINE TRANSITIONS
         At(idleState, walkingState, new FuncPredicate(() => moveDir > 0 && isGrounded()));
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour
         At(walkingBackState, idleState, new FuncPredicate(() => moveDir == 0 && isGrounded()));
         At(walkingBackState, jumpState, new FuncPredicate(() => moveDir < 0 && !isGrounded()));
         At(walkingBackState, walkingState, new FuncPredicate(() => moveDir > 0 && isGrounded()));
+
+        At(idleState, attackState, new FuncPredicate(() => Input.GetKeyDown(KeyCode.E)));
+        At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
 
         // SET INTITIAL STATE
         stateMachine.SetState(walkingState);

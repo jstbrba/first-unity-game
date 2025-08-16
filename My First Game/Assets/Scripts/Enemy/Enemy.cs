@@ -53,8 +53,6 @@ namespace Game
 
             direction = Mathf.Sign(player.position.x - transform.position.x);
 
-            Debug.Log(IsPlayerInRange() + " " +  IsSafeRange() + " " + IsLowHealth);
-
             if (Input.GetKeyDown(KeyCode.H)) health.TakeDamage(1);
         }
         private void FixedUpdate()

@@ -578,13 +578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8e4d76aa78c334791282346e3c472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  range: 1
-  cooldown: 1
-  hitBoxSize: {x: 2, y: 1}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  attacks:
+  - {fileID: 11400000, guid: 64ca76197feccf44fb1e7ec6ef51bb9e, type: 2}
 --- !u!95 &1367329066
 Animator:
   serializedVersion: 7

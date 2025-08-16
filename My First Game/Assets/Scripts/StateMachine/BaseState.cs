@@ -11,6 +11,7 @@ namespace Game
         protected static readonly int WalkHash = Animator.StringToHash("Walk");
         protected static readonly int WalkBackHash = Animator.StringToHash("WalkBack");
         protected static readonly int JumpHash = Animator.StringToHash("Jump");
+        protected static readonly int AttackHash = Animator.StringToHash("Attack");
 
         protected BaseState(PlayerController player, Animator anim)
         {

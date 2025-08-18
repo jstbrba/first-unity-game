@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private AttackStrategy[] attacks;
-    public void Attack(int index)
+    [SerializeField] public AttackStrategy[] attacks;
+
+    [SerializeField] private int index; // make an actual way to change it in game
+    public void Attack()
     {
         attacks[index].Attack(transform);
     }

@@ -1,7 +1,7 @@
 using Game;
 using UnityEngine;
 
-public partial class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpPower;
@@ -16,11 +16,11 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] private Transform enemy;
 
     private float horizontalInput;
+    private bool isMoving => horizontalInput != 0;
     private bool jumpPressed;
     private bool crouchPressed;
     private bool isSprinting;
     public float moveDir;
-    private bool grounded;
 
     private StateMachine stateMachine;
 
@@ -44,24 +44,33 @@ public partial class PlayerController : MonoBehaviour
         var attackState = new AttackState(this, anim, playerAttack);
 
         // DEFINE TRANSITIONS ----------------------------------MAKE SIMPLER LATER COS THIS IS LONGGGGGGGGGGGGG------------
-        At(idleState, walkingState, new FuncPredicate(() => moveDir != 0 && isGrounded()));
-        At(idleState, jumpState, new FuncPredicate(() => moveDir == 0 && !isGrounded()));
-
-        At(walkingState, jumpState, new FuncPredicate(() => moveDir != 0 && !isGrounded()));
-        At(walkingState, idleState, new FuncPredicate(() => moveDir == 0 && isGrounded() && !isSprinting && !crouchPressed));
-
-        At(jumpState, idleState, new FuncPredicate(() => moveDir == 0 && isGrounded()));
-        At(jumpState, walkingState, new FuncPredicate(() => moveDir != 0 && isGrounded()));
-
+        At(idleState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(idleState, jumpState, new FuncPredicate(() => !isMoving && !isGrounded() && !isSprinting && !crouchPressed));
+        At(idleState, crouchState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && crouchPressed));
+        At(idleState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
         At(idleState, attackState, new FuncPredicate(() => Input.GetKeyDown(KeyCode.E) && isGrounded()));
+
+        At(walkingState, jumpState, new FuncPredicate(() => isMoving && !isGrounded() && !isSprinting && !crouchPressed));
+        At(walkingState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(walkingState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
+        At(walkingState, crouchState, new FuncPredicate(() => isGrounded() && crouchPressed));
+
+        At(jumpState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(jumpState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(jumpState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
+        At(jumpState, crouchState, new FuncPredicate(() => isGrounded() && crouchPressed));
+
         At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
 
-        At(idleState, crouchState, new FuncPredicate(() => moveDir == 0 && isGrounded() && crouchPressed));
-        At(crouchState, idleState, new FuncPredicate(() => moveDir == 0 && isGrounded() && !crouchPressed));
+        At(crouchState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(crouchState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(crouchState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
+        At(crouchState, jumpState, new FuncPredicate(() => isMoving && !isGrounded() && !isSprinting && !crouchPressed));
 
-        At(walkingState, sprintState, new FuncPredicate(() => moveDir != 0 && isGrounded() && isSprinting));
-        At(sprintState, walkingState, new FuncPredicate(() => moveDir != 0 && isGrounded() && !isSprinting));
-        At(sprintState, jumpState, new FuncPredicate(() => moveDir != 0 && !isGrounded() && isSprinting));
+        At(sprintState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(sprintState, jumpState, new FuncPredicate(() => isMoving && !isGrounded() && isSprinting && !crouchPressed));
+        At(sprintState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
+        At(sprintState, crouchState, new FuncPredicate(() => isGrounded() && crouchPressed));
 
         //Any(idleState, new FuncPredicate(() => moveDir == 0 && isGrounded() && !crouchPressed && !isSprinting && !attackState.IsAttackFinished));
         //Any(attackState, new FuncPredicate(() => isGrounded() && Input.GetKeyDown(KeyCode.E)));

@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        attacks[0].DrawGizmos(transform);
+        attacks[index].DrawGizmos(transform);
     }
     public event Action OnAttackEnd;
     public void NotifyAttackEnd() => OnAttackEnd?.Invoke();

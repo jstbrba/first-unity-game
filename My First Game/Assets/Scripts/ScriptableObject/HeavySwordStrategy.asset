@@ -15,5 +15,5 @@ MonoBehaviour:
   animationName: SwordHeavy
   animHash: -1176475842
   damage: 3
-  range: 1.57
-  hitBoxSize: {x: 2.67, y: 1.42}
+  range: 1.13
+  hitBoxSize: {x: 1.61, y: 1.94}

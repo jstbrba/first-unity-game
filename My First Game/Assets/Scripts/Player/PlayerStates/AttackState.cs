@@ -4,19 +4,16 @@ namespace Game
 {
     public class AttackState : BaseState
     {
-        private PlayerAttack playerAttack;
-        private AttackStrategy currentStrategy;
+        private readonly PlayerAttack playerAttack;
         private bool attackFinished;
-        public AttackState(PlayerController player, Animator anim) : base(player, anim) 
+        public AttackState(PlayerController player, Animator anim, PlayerAttack playerAttack) : base(player, anim) 
         {
-            playerAttack = player.GetComponent<PlayerAttack>();
+            this.playerAttack = playerAttack;
         }
-        public void SetStrategy(AttackStrategy strategy) => currentStrategy = strategy;
-
         public override void OnEnter()
         {
             Debug.Log("Entering attack state");
-            anim.Play(currentStrategy.animHash); // CAHCIHIH
+            anim.Play(playerAttack.currentStrategy.animHash);
             attackFinished = false;
 
             // attack handled in animator events

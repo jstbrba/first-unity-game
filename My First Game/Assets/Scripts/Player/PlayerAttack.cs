@@ -5,7 +5,26 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] public AttackStrategy[] attacks;
 
-    [SerializeField] private int index; // make an actual way to change it in game
+    private int index = 0;
+    public AttackStrategy currentStrategy => attacks[index];
+
+    private void OnEnable()
+    {
+        HeadsUpDisplay.OnButtonPressed += SelectStrategy;
+    }
+    private void OnDisable()
+    {
+        HeadsUpDisplay.OnButtonPressed -= SelectStrategy;
+    }
+
+    private void SelectStrategy(int i)
+    {
+        if (i < attacks.Length)
+        {
+            index = i;
+            Debug.Log("Attack " + (i + 1) + " is selected");
+        }
+    }
     public void Attack()
     {
         attacks[index].Attack(transform);

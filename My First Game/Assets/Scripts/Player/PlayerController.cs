@@ -1,7 +1,7 @@
 using Game;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpPower;
@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Animator anim;
     private PlayerAttack playerAttack;
+    private InputReader inputReader;
 
     [SerializeField] private Transform enemy;
 
@@ -23,14 +24,13 @@ public class PlayerController : MonoBehaviour
 
     private StateMachine stateMachine;
 
-    private AttackState attackState;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
+        inputReader = GetComponent<InputReader>();
 
         // STATE MACHINE
         stateMachine = new StateMachine();
@@ -41,8 +41,7 @@ public class PlayerController : MonoBehaviour
         var sprintState = new SprintState(this, anim);
         var crouchState = new CrouchState(this, anim);
         var jumpState = new JumpState(this, anim);
-        attackState = new AttackState(this, anim);
-        attackState.SetStrategy(playerAttack.attacks[0]); // CHANGE LATER
+        var attackState = new AttackState(this, anim, playerAttack);
 
         // DEFINE TRANSITIONS ----------------------------------MAKE SIMPLER LATER COS THIS IS LONGGGGGGGGGGGGG------------
         At(idleState, walkingState, new FuncPredicate(() => moveDir != 0 && isGrounded()));
@@ -75,20 +74,10 @@ public class PlayerController : MonoBehaviour
     private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-
-        if (Mathf.Abs(horizontalInput) > 0.01f && Input.GetKey(KeyCode.LeftShift)) isSprinting = true;
-        else isSprinting = false;
-
-        if (Input.GetKeyDown(KeyCode.W)) jumpPressed = true;
-        if (Input.GetKeyUp(KeyCode.W)) jumpPressed = false;
-
-        if (Input.GetKeyDown(KeyCode.S)) crouchPressed = true;
-        if (Input.GetKeyUp(KeyCode.S)) crouchPressed = false;
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) attackState.SetStrategy(playerAttack.attacks[0]);  // CHANGE LATER
-        if (Input.GetKeyDown(KeyCode.Alpha2)) attackState.SetStrategy(playerAttack.attacks[1]);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) attackState.SetStrategy(playerAttack.attacks[2]);
+        horizontalInput = inputReader.moveAxis;
+        isSprinting = inputReader.sprintPressed && Mathf.Abs(horizontalInput) > 0.01f;
+        jumpPressed = inputReader.jumpPressed;
+        crouchPressed = inputReader.crouchPressed;
 
         // FLIP CHARACTER
         if (Mathf.Abs(horizontalInput) > 0)

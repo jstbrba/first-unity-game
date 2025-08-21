@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utilities;
 namespace Game
 {
     public class Enemy : MonoBehaviour
@@ -6,12 +7,10 @@ namespace Game
 
         [SerializeField] private float movementSpeed;
         [SerializeField] private Transform player;
-        [SerializeField] private float detectionRange;
-        [SerializeField] private float safeRange;
-        private float direction;
 
         private Rigidbody2D body;
         private Animator anim;
+        private PlayerDetector playerDetector;
         private Vector3 originalScale;
 
         private StateMachine stateMachine;
@@ -19,11 +18,15 @@ namespace Game
         private Health health;
         private float lowHealthThreshold = 2;
 
+        private EnemyAttack enemyAttack;
+
         private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             health = GetComponent<Health>();
+            enemyAttack = GetComponent<EnemyAttack>();
+            playerDetector = GetComponent<PlayerDetector>();
             originalScale = transform.localScale;
 
             stateMachine = new StateMachine();
@@ -31,12 +34,16 @@ namespace Game
             var idleState = new EnemyIdleState(this, anim);
             var chaseState = new EnemyChaseState(this, anim);
             var retreatState = new EnemyRetreatState(this, anim);
+            var attackState = new EnemyAttackState(this, anim, enemyAttack);
 
-            At(idleState, chaseState, new FuncPredicate(() => IsPlayerInRange()));
-            At(chaseState, idleState, new FuncPredicate(() => !IsPlayerInRange()));
+            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange()));
+            At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange()));
 
-            At(retreatState, idleState, new FuncPredicate(() => IsSafeRange()));
+            At(retreatState, idleState, new FuncPredicate(() => playerDetector.SafeRange()));
             Any(retreatState, new FuncPredicate(() => IsLowHealth));
+            Any(attackState, new FuncPredicate(() => playerDetector.CanAttack() && !enemyAttack.IsRunning));
+
+            At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
 
             stateMachine.SetState(idleState);
         }
@@ -45,33 +52,20 @@ namespace Game
         private void Update()
         {
             stateMachine.Update();
+
             // FLIP ENEMY
             if (player.position.x < transform.position.x)
                 transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
             else
                 transform.localScale = originalScale;
-
-            direction = Mathf.Sign(player.position.x - transform.position.x);
-
-            if (Input.GetKeyDown(KeyCode.H)) health.TakeDamage(1);
         }
         private void FixedUpdate()
         {
             stateMachine.FixedUpdate();
         }
-        public void Chase() => body.linearVelocity = new Vector2(movementSpeed * direction, body.linearVelocity.y);
-        public void Retreat() => body.linearVelocity = new Vector2(-movementSpeed * direction, body.linearVelocity.y);
+        public void Chase() => body.linearVelocity = new Vector2(movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
+        public void Retreat() => body.linearVelocity = new Vector2(-movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
 
-        private bool IsPlayerInRange()
-        {
-            float distance = Vector3.Distance(transform.position, player.position);
-            return distance < detectionRange;
-        }
-        private bool IsSafeRange()
-        {
-            float distance = Vector3.Distance(transform.position, player.position);
-            return distance > safeRange;
-        }
         private bool IsLowHealth => (health.currentHealth <= lowHealthThreshold);
     }
 }

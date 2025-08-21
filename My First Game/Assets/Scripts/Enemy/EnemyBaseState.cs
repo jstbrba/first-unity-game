@@ -9,7 +9,8 @@ namespace Game
 
         protected static readonly int IdleHash = Animator.StringToHash("Idle");
         protected static readonly int WalkHash = Animator.StringToHash("Walk");
-        protected static readonly int WalkBackHash = Animator.StringToHash("WalkBack");
+        protected static readonly int RetreatHash = Animator.StringToHash("Retreat");
+        protected static readonly int AttackHash = Animator.StringToHash("Attack");
 
         protected EnemyBaseState(Enemy enemy, Animator anim)
         {

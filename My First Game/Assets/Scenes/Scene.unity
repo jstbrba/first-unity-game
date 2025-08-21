@@ -1930,6 +1930,7 @@ GameObject:
   - component: {fileID: 1963597562}
   - component: {fileID: 1963597563}
   - component: {fileID: 1963597564}
+  - component: {fileID: 1963597565}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -1987,8 +1988,8 @@ BoxCollider2D:
   m_Offset: {x: -0.0028128773, y: -0.07313216}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    pivot: {x: 0.5, y: 0.25}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2067,8 +2068,8 @@ SpriteRenderer:
   m_SortingLayerID: -1755361237
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 07c787b5cf7585c42a393f6c5be503a6, type: 3}
-  m_Color: {r: 0.63634396, g: 0.066037595, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ab978dba35845a04881f9422064be8b4, type: 3}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0.99607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2108,12 +2109,10 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 512
-  damage: 1
-  cooldown: 5
-  closeRangeBox: {x: 3, y: 3}
-  closeAttackDistance: 1
-  longRangeBox: {x: 3, y: 3}
-  longAttackDistance: 3
+  damage: 3
+  closeRangeBox: {x: 4.03, y: 3.88}
+  closeAttackDistance: 0.61
+  attackCoolDownTime: 3
 --- !u!95 &1963597563
 Animator:
   serializedVersion: 7
@@ -2150,8 +2149,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1
   player: {fileID: 1367329062}
-  detectionRange: 7.4
-  safeRange: 10.9
+--- !u!114 &1963597565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963597555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba12a74c897e8b94499db90c025c7317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 8
+  safeRange: 10
+  attackRange: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

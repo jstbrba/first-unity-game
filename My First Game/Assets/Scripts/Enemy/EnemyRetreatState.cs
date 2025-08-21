@@ -9,7 +9,7 @@ namespace Game
         public override void OnEnter()
         {
             Debug.Log("Enemy entered Retreat State");
-            anim.Play(WalkBackHash);
+            anim.Play(RetreatHash);
         }
         public override void FixedUpdate()
         {

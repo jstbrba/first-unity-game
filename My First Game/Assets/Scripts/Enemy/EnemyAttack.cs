@@ -33,9 +33,8 @@ public class EnemyAttack : MonoBehaviour
         if (shortHit)
         {
             shortHit.GetComponent<Health>().TakeDamage(damage);
-            Debug.Log("Short range attack from enemy");
-            attackCountdown.Start();
         }
+        attackCountdown.Start();
     }
 
     private void OnDrawGizmos()

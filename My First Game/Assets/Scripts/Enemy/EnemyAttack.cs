@@ -20,6 +20,14 @@ public class EnemyAttack : MonoBehaviour
     {
         attackCountdown = new CountdownTimer(attackCoolDownTime);
     }
+    private void OnEnable()
+    {
+        OnEnemyAttackEnd += ResetCooldown;
+    }
+    private void OnDisable()
+    {
+        OnEnemyAttackEnd -= ResetCooldown;
+    }
     private void Update()
     {
         attackCountdown.Tick(Time.deltaTime);
@@ -34,8 +42,8 @@ public class EnemyAttack : MonoBehaviour
         {
             shortHit.GetComponent<Health>().TakeDamage(damage);
         }
-        attackCountdown.Start();
     }
+    private void ResetCooldown() => attackCountdown.Start();
 
     private void OnDrawGizmos()
     {

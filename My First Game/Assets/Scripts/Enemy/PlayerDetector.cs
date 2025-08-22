@@ -25,6 +25,11 @@ namespace Game
             float distance = Vector3.Distance(transform.position, Player.position);
             return distance < detectionRange;
         }
+        public bool InAttackRange()
+        {
+            float distance = Vector3.Distance(transform.position, Player.position);
+            return distance < attackRange;
+        }
         public bool SafeRange()
         {
             float distance = Vector3.Distance(transform.position, Player.position);

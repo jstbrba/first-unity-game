@@ -35,8 +35,8 @@ namespace Game
             var retreatState = new EnemyRetreatState(this, anim);
             var attackState = new EnemyAttackState(this, anim, enemyAttack);
 
-            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange()));
-            At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange()));
+            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange() && !playerDetector.CloseRange()));
+            At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange() || playerDetector.CloseRange()));
 
             At(retreatState, idleState, new FuncPredicate(() => playerDetector.SafeRange()));
             Any(retreatState, new FuncPredicate(() => IsLowHealth));

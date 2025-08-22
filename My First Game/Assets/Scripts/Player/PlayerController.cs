@@ -1,7 +1,7 @@
 using Game;
 using UnityEngine;
 
-public partial class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpPower;

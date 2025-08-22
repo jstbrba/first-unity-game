@@ -7,6 +7,7 @@ namespace Game
         public Transform Player {  get; private set; }
         [SerializeField] private float detectionRange;
         [SerializeField] private float safeRange;
+        [SerializeField] private float closeRange = 1f;
         [SerializeField] private float attackRange; // change later so that attack's class colliders and this range match, probably make a da
         public float Direction() => Mathf.Sign(Player.position.x - transform.position.x);
 
@@ -28,6 +29,11 @@ namespace Game
         {
             float distance = Vector3.Distance(transform.position, Player.position);
             return distance > safeRange;
+        }
+        public bool CloseRange()
+        {
+            float distance = Vector3.Distance(transform.position, Player.position);
+            return distance < closeRange;
         }
 
     }

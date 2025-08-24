@@ -6,6 +6,8 @@ namespace Game
     {
 
         [SerializeField] private float movementSpeed;
+        [SerializeField] private int moneyOnDeath = 20;
+        [SerializeField] private IntEventChannel moneyChannel;
 
         private Rigidbody2D body;
         private Animator anim;
@@ -28,26 +30,17 @@ namespace Game
             playerDetector = GetComponent<PlayerDetector>();
             originalScale = transform.localScale;
 
-            stateMachine = new StateMachine();
-
-            var idleState = new EnemyIdleState(this, anim);
-            var chaseState = new EnemyChaseState(this, anim);
-            var retreatState = new EnemyRetreatState(this, anim);
-            var attackState = new EnemyAttackState(this, anim, enemyAttack);
-
-            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange() && !playerDetector.InAttackRange()));
-            At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange() || playerDetector.InAttackRange()));
-
-            At(retreatState, idleState, new FuncPredicate(() => playerDetector.SafeRange()));
-            Any(retreatState, new FuncPredicate(() => (IsLowHealth || playerDetector.CloseRange()) && enemyAttack.IsRunning));
-            Any(attackState, new FuncPredicate(() => playerDetector.CanAttack() && !enemyAttack.IsRunning));
-
-            At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
-
-            stateMachine.SetState(idleState);
+            ConfigureStateMachine();
         }
-        private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
-        private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
+        private void OnEnable()
+        {
+            health.OnDeath += HandleDeath;
+        }
+        private void OnDisable()
+        {
+            health.OnDeath -= HandleDeath;
+        }
+
         private void Update()
         {
             stateMachine.Update();
@@ -67,5 +60,29 @@ namespace Game
         public void Retreat() => body.linearVelocity = new Vector2(-movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
 
         private bool IsLowHealth => (health.currentHealth <= lowHealthThreshold);
+        private void HandleDeath() => moneyChannel.Invoke(moneyOnDeath);
+        private void ConfigureStateMachine()
+        {
+            stateMachine = new StateMachine();
+
+            var idleState = new EnemyIdleState(this, anim);
+            var chaseState = new EnemyChaseState(this, anim);
+            var retreatState = new EnemyRetreatState(this, anim);
+            var attackState = new EnemyAttackState(this, anim, enemyAttack);
+
+            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange() && !playerDetector.InAttackRange()));
+            At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange() || playerDetector.InAttackRange()));
+
+            At(retreatState, idleState, new FuncPredicate(() => playerDetector.SafeRange()));
+            Any(retreatState, new FuncPredicate(() => (IsLowHealth || playerDetector.CloseRange()) && enemyAttack.IsRunning));
+            Any(attackState, new FuncPredicate(() => playerDetector.CanAttack() && !enemyAttack.IsRunning));
+
+            At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
+
+            stateMachine.SetState(idleState);
+        }
+
+        private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
+        private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
     }
 }

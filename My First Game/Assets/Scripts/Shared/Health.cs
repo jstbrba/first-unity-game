@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     public int currentHealth { get; private set; }
 
     public event Action<int,int> OnHealthChange;
+    public event Action OnDeath;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class Health : MonoBehaviour
         } else
         {
             Debug.Log(gameObject.name + " is dead");
+            OnDeath?.Invoke();
             gameObject.SetActive(false);
         }
         OnHealthChange?.Invoke(currentHealth, startingHealth);

@@ -7,7 +7,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private LayerMask playerMask;
 
     [Header("Attack Attributes")]
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
 
     [Header("Close-range Attack")]
     [SerializeField] private Vector2 closeRangeBox;

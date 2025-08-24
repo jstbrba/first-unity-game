@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float startingHealth;
-    public float currentHealth { get; private set; }
+    [SerializeField] private int startingHealth;
+    public int currentHealth { get; private set; }
+
+    public event Action<int,int> OnHealthChange;
 
     private void Awake()
     {
@@ -11,7 +14,7 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float _damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        currentHealth = (int)Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
         if (currentHealth > 0)
         {
@@ -21,5 +24,6 @@ public class Health : MonoBehaviour
             Debug.Log(gameObject.name + " is dead");
             gameObject.SetActive(false);
         }
+        OnHealthChange?.Invoke(currentHealth, startingHealth);
     }
 }

@@ -3,7 +3,7 @@
 public class MeleeStrategy : AttackStrategy
 {
     [Header("Attack Settings")]
-    [SerializeField] public float damage;
+    [SerializeField] public int damage;
     [SerializeField] private float range;
     [SerializeField] private Vector2 hitBoxSize = new Vector2(1f,1f);
 

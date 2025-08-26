@@ -22,7 +22,6 @@ public class PlayerAttack : MonoBehaviour
         if (i < attacks.Length)
         {
             index = i;
-            Debug.Log("Attack " + (i + 1) + " is selected");
         }
     }
     public void Attack()

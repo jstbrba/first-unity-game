@@ -7,7 +7,6 @@ namespace Game
 
         [SerializeField] private float movementSpeed;
         [SerializeField] private int moneyOnDeath = 20;
-        [SerializeField] private IntEventChannel moneyChannel;
 
         private Rigidbody2D body;
         private Animator anim;
@@ -21,6 +20,8 @@ namespace Game
 
         private EnemyAttack enemyAttack;
 
+        public int MoneyOnDeath => moneyOnDeath;
+
         private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
@@ -32,15 +33,6 @@ namespace Game
 
             ConfigureStateMachine();
         }
-        private void OnEnable()
-        {
-            health.OnDeath += HandleDeath;
-        }
-        private void OnDisable()
-        {
-            health.OnDeath -= HandleDeath;
-        }
-
         private void Update()
         {
             stateMachine.Update();
@@ -50,7 +42,6 @@ namespace Game
                 transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
             else
                 transform.localScale = originalScale;
-
         }
         private void FixedUpdate()
         {
@@ -60,7 +51,6 @@ namespace Game
         public void Retreat() => body.linearVelocity = new Vector2(-movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
 
         private bool IsLowHealth => (health.currentHealth <= lowHealthThreshold);
-        private void HandleDeath() => moneyChannel.Invoke(moneyOnDeath);
         private void ConfigureStateMachine()
         {
             stateMachine = new StateMachine();

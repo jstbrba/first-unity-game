@@ -25,6 +25,7 @@ public class Health : MonoBehaviour
             Debug.Log(gameObject.name + " is dead");
             OnDeath?.Invoke();
             gameObject.SetActive(false);
+            // Destroy(gameObject); // TODO: Use object pooling instead
         }
         OnHealthChange?.Invoke(currentHealth, startingHealth);
     }

@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateMoney(int amount)
     {
-        Money = Money + Mathf.Max(0, Money + amount);
+        Debug.Log(Money + " + " + Mathf.Max(Money + amount));
+        Money = Mathf.Max(0, Money + amount);
         Debug.Log(Money);
     }
 }

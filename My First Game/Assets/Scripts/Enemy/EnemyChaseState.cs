@@ -8,7 +8,6 @@ namespace Game
 
         public override void OnEnter()
         {
-            Debug.Log("Enemy entered Chase State");
             anim.Play(WalkHash);
         }
         public override void FixedUpdate()

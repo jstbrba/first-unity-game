@@ -11,6 +11,10 @@ namespace Game
             Debug.Log("Enemy Entered Retreat State");
             anim.Play(RetreatHash);
         }
+        public override void Update()
+        {
+            enemy.FacePlayer();
+        }
         public override void FixedUpdate()
         {
             enemy.Retreat();

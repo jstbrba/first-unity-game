@@ -38,12 +38,6 @@ namespace Game
         private void Update()
         {
             stateMachine.Update();
-
-            // FLIP ENEMY
-            if (playerDetector.Player.position.x < transform.position.x)
-                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
-            else
-                transform.localScale = originalScale;
         }
         private void FixedUpdate()
         {
@@ -51,6 +45,13 @@ namespace Game
         }
         public void Chase() => body.linearVelocity = new Vector2(movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
         public void Retreat() => body.linearVelocity = new Vector2(-movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
+        public void FacePlayer()
+        {
+            if (playerDetector.Player.position.x < transform.position.x)
+                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+            else
+                transform.localScale = originalScale;
+        }
 
         private bool IsLowHealth => (health.currentHealth <= lowHealthThreshold);
         private void ConfigureStateMachine()

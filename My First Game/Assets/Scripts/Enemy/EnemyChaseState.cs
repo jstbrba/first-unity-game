@@ -10,6 +10,10 @@ namespace Game
         {
             anim.Play(WalkHash);
         }
+        public override void Update()
+        {
+            enemy.FacePlayer();
+        }
         public override void FixedUpdate()
         {
             enemy.Chase();

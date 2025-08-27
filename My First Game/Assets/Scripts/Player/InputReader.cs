@@ -2,6 +2,7 @@
 namespace Game
 {
     public class InputReader : MonoBehaviour {
+        // TODO: Switch to new input system
         public float moveAxis => Input.GetAxis("Horizontal");
         public bool jumpPressed => Input.GetKey(KeyCode.W);
         public bool crouchPressed => Input.GetKey(KeyCode.S);

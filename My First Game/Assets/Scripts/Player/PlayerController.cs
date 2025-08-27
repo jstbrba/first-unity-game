@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed;
     private bool crouchPressed;
     private bool isSprinting;
-    public float moveDir;
+    public float moveDir { get; private set; }
 
     private StateMachine stateMachine;
 

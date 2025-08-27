@@ -8,6 +8,7 @@ namespace Game
 
         public override void OnEnter()
         {
+            Debug.Log("Enemy Entered Retreat State");
             anim.Play(RetreatHash);
         }
         public override void FixedUpdate()

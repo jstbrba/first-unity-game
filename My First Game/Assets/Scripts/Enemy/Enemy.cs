@@ -5,8 +5,10 @@ namespace Game
     public class Enemy : MonoBehaviour
     {
 
-        [SerializeField] private float movementSpeed;
-        [SerializeField] private int moneyOnDeath = 20;
+        private float movementSpeed = 1.5f;
+        public void SetMovementSpeed(float speed) => movementSpeed = Mathf.Max(0, speed);
+        private int moneyOnDeath = 20;
+        public void SetMoneyOnDeath(int moneyOnDeath) => this.moneyOnDeath = Mathf.Max(0, moneyOnDeath);
 
         private Rigidbody2D body;
         private Animator anim;
@@ -64,7 +66,7 @@ namespace Game
             At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange() || playerDetector.InAttackRange()));
 
             At(retreatState, idleState, new FuncPredicate(() => playerDetector.SafeRange()));
-            Any(retreatState, new FuncPredicate(() => (IsLowHealth || playerDetector.CloseRange()) && enemyAttack.IsRunning));
+            Any(retreatState, new FuncPredicate(() => (IsLowHealth && !playerDetector.SafeRange() || playerDetector.CloseRange()) && enemyAttack.IsRunning));
             Any(attackState, new FuncPredicate(() => playerDetector.CanAttack() && !enemyAttack.IsRunning));
 
             At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));

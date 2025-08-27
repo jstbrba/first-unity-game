@@ -137,7 +137,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4deea1ba62271454fa32ddfc243d8d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
+  maxHealth: 0
 --- !u!114 &7810429856906766693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a67f5ac3f0ef3f4a93b209f9fc26296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  moneyOnDeath: 20
-  moneyChannel: {fileID: 11400000, guid: 6a75ade36b3d48045bf1c34cfaeb520a, type: 2}
 --- !u!114 &4359006501300039801
 MonoBehaviour:
   m_ObjectHideFlags: 0

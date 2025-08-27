@@ -3,19 +3,18 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int startingHealth;
+    [SerializeField] private int maxHealth;
     public int currentHealth { get; private set; }
 
     public event Action<int,int> OnHealthChange;
-    public event Action OnDeath;
 
-    private void Awake()
+    private void Start()
     {
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
     }
     public void TakeDamage(float _damage)
     {
-        currentHealth = (int)Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        currentHealth = (int)Mathf.Clamp(currentHealth - _damage, 0, maxHealth);
 
         if (currentHealth > 0)
         {
@@ -23,10 +22,10 @@ public class Health : MonoBehaviour
         } else
         {
             Debug.Log(gameObject.name + " is dead");
-            OnDeath?.Invoke();
             gameObject.SetActive(false);
             // Destroy(gameObject); // TODO: Use object pooling instead
         }
-        OnHealthChange?.Invoke(currentHealth, startingHealth);
+        OnHealthChange?.Invoke(currentHealth, maxHealth);
     }
+    public void SetMaxHealth(int maxHealth) => this.maxHealth = Mathf.Max(0, maxHealth);
 }

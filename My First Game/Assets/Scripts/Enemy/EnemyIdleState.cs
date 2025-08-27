@@ -11,5 +11,9 @@ namespace Game
             Debug.Log("Enemy Entered Idle State");
             anim.Play(IdleHash);
         }
+        public override void Update()
+        {
+            enemy.FacePlayer();
+        }
     }
 }

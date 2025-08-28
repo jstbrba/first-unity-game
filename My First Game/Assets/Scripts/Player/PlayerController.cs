@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
         At(walkingState, idleState, new FuncPredicate(() => CanIdle()));
         At(walkingState, sprintState, new FuncPredicate(() => CanSprint()));
         At(walkingState, crouchState, new FuncPredicate(() => CanCrouch()));
+        At(walkingState, attackState, new FuncPredicate(() => CanAttack()));
 
         At(jumpState, idleState, new FuncPredicate(() => CanIdle()));
         At(jumpState, walkingState, new FuncPredicate(() => CanWalk()));
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour
         At(sprintState, jumpState, new FuncPredicate(() => CanJump()));
         At(sprintState, idleState, new FuncPredicate(() => CanIdle()));
         At(sprintState, crouchState, new FuncPredicate(() => CanCrouch()));
+        At(sprintState, attackState, new FuncPredicate(() => CanAttack()));
 
         // SET INTITIAL STATE
         stateMachine.SetState(idleState);

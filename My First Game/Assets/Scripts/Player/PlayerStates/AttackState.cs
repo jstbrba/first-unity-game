@@ -21,6 +21,7 @@ namespace Game
         }
         public override void OnExit()
         {
+            playerAttack.FinishAttack();
             playerAttack.OnAttackEnd -= HandleAttackEnd;
         }
         private void HandleAttackEnd() => attackFinished = true;

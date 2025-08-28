@@ -7,23 +7,12 @@ public class PlayerAttack : MonoBehaviour
 
     private int index = 0;
     public AttackStrategy currentStrategy => attacks[index];
+    private bool isAttacking;
 
-    // TODO : Decouple player attack and HUD
-    private void OnEnable()
+    public void StartAttack(int index)
     {
-        HeadsUpDisplay.OnButtonPressed += SelectStrategy;
-    }
-    private void OnDisable()
-    {
-        HeadsUpDisplay.OnButtonPressed -= SelectStrategy;
-    }
-
-    private void SelectStrategy(int i)
-    {
-        if (i < attacks.Length)
-        {
-            index = i;
-        }
+        this.index = index;
+        isAttacking = true;
     }
     public void Attack()
     {
@@ -35,4 +24,6 @@ public class PlayerAttack : MonoBehaviour
     }
     public event Action OnAttackEnd;
     public void NotifyAttackEnd() => OnAttackEnd?.Invoke();
+    public void FinishAttack() => isAttacking = false;
+    public bool IsAttacking => isAttacking;
 }

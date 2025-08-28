@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed;
     private bool crouchPressed;
     private bool isSprinting;
+    private bool isAttacking;
     public float moveDir { get; private set; }
 
     private StateMachine stateMachine;
@@ -123,5 +124,5 @@ public class PlayerController : MonoBehaviour
     private bool CanSprint() => isMoving && isGrounded() && isSprinting && !crouchPressed;
     private bool CanJump() => !isGrounded();
     private bool CanCrouch() => isGrounded() && crouchPressed;
-    private bool CanAttack() => inputReader.attackPressed && isGrounded();
+    private bool CanAttack() => playerAttack.IsAttacking && isGrounded();
 }

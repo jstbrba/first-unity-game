@@ -9,7 +9,6 @@ namespace Game
         public override void OnEnter()
         {
             anim.Play(WalkHash);
-            Debug.Log("Entering Walking State");
         }
         public override void FixedUpdate()
         {

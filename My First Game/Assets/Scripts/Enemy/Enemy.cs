@@ -64,13 +64,16 @@ namespace Game
             var attackState = new EnemyAttackState(this, anim, enemyAttack);
 
             At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange() && !playerDetector.InAttackRange()));
+
             At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange() || playerDetector.InAttackRange()));
 
+            At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
+
             At(retreatState, idleState, new FuncPredicate(() => IsLowHealth && playerDetector.SafeRange() || !IsLowHealth && playerDetector.InAttackRange()));
+
             Any(retreatState, new FuncPredicate(() => (IsLowHealth && !playerDetector.SafeRange() || playerDetector.CloseRange()) && enemyAttack.IsRunning));
             Any(attackState, new FuncPredicate(() => playerDetector.CanAttack() && !enemyAttack.IsRunning));
 
-            At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
 
             stateMachine.SetState(idleState);
         }

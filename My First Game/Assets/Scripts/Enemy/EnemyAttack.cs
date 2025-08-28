@@ -9,12 +9,13 @@ public class EnemyAttack : MonoBehaviour
     [Header("Attack Attributes")]
     [SerializeField] private int damage;
 
+    private CountdownTimer attackCountdown;
+    [SerializeField] private float attackCoolDownTime = 3f;
+
     [Header("Close-range Attack")]
     [SerializeField] private Vector2 closeRangeBox;
     [SerializeField] private float closeAttackDistance;
 
-    private CountdownTimer attackCountdown;
-    [SerializeField] private float attackCoolDownTime = 3f;
 
     private void Start()
     {

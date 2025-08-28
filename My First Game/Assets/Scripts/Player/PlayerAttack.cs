@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
     private int index = 0;
     public AttackStrategy currentStrategy => attacks[index];
 
+    // TODO : Decouple player attack and HUD
     private void OnEnable()
     {
         HeadsUpDisplay.OnButtonPressed += SelectStrategy;

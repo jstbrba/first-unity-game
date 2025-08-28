@@ -9,7 +9,6 @@ namespace Game
         public override void OnEnter()
         {
             anim.Play(JumpHash);
-            Debug.Log("Entering Jump State");
         }
         public override void FixedUpdate()
         {

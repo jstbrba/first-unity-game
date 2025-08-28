@@ -84,38 +84,44 @@ public class PlayerController : MonoBehaviour
         var jumpState = new JumpState(this, anim);
         var attackState = new AttackState(this, anim, playerAttack);
 
-        // DEFINE TRANSITIONS ----------------------------------MAKE SIMPLER LATER COS THIS IS LONGGGGGGGGGGGGG------------
-        At(idleState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(idleState, jumpState, new FuncPredicate(() => !isMoving && !isGrounded() && !isSprinting && !crouchPressed));
-        At(idleState, crouchState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && crouchPressed));
-        At(idleState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
-        At(idleState, attackState, new FuncPredicate(() => inputReader.attackPressed && isGrounded()));
+        // DEFINE TRANSITIONS 
+        At(idleState, jumpState, new FuncPredicate(() => CanJump()));
+        At(idleState, walkingState, new FuncPredicate(() => CanWalk()));
+        At(idleState, crouchState, new FuncPredicate(() => CanCrouch()));
+        At(idleState, sprintState, new FuncPredicate(() => CanSprint()));
+        At(idleState, attackState, new FuncPredicate(() => CanAttack()));
 
-        At(walkingState, jumpState, new FuncPredicate(() => isMoving && !isGrounded() && !isSprinting && !crouchPressed));
-        At(walkingState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(walkingState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
-        At(walkingState, crouchState, new FuncPredicate(() => isGrounded() && crouchPressed));
+        At(walkingState, jumpState, new FuncPredicate(() => CanJump()));
+        At(walkingState, idleState, new FuncPredicate(() => CanIdle()));
+        At(walkingState, sprintState, new FuncPredicate(() => CanSprint()));
+        At(walkingState, crouchState, new FuncPredicate(() => CanCrouch()));
 
-        At(jumpState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(jumpState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(jumpState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
-        At(jumpState, crouchState, new FuncPredicate(() => isGrounded() && crouchPressed));
-
+        At(jumpState, idleState, new FuncPredicate(() => CanIdle()));
+        At(jumpState, walkingState, new FuncPredicate(() => CanWalk()));
+        At(jumpState, sprintState, new FuncPredicate(() => CanSprint()));
+        At(jumpState, crouchState, new FuncPredicate(() => CanCrouch()));
+        
         At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
 
-        At(crouchState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(crouchState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(crouchState, sprintState, new FuncPredicate(() => isMoving && isGrounded() && isSprinting && !crouchPressed));
-        At(crouchState, jumpState, new FuncPredicate(() => isMoving && !isGrounded() && !isSprinting && !crouchPressed));
+        At(crouchState, idleState, new FuncPredicate(() => CanIdle()));
+        At(crouchState, walkingState, new FuncPredicate(() => CanWalk()));
+        At(crouchState, sprintState, new FuncPredicate(() => CanSprint()));
+        At(crouchState, jumpState, new FuncPredicate(() => CanJump()));
 
-        At(sprintState, walkingState, new FuncPredicate(() => isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(sprintState, jumpState, new FuncPredicate(() => isMoving && !isGrounded() && isSprinting && !crouchPressed));
-        At(sprintState, idleState, new FuncPredicate(() => !isMoving && isGrounded() && !isSprinting && !crouchPressed));
-        At(sprintState, crouchState, new FuncPredicate(() => isGrounded() && crouchPressed));
+        At(sprintState, walkingState, new FuncPredicate(() => CanWalk()));
+        At(sprintState, jumpState, new FuncPredicate(() => CanJump()));
+        At(sprintState, idleState, new FuncPredicate(() => CanIdle()));
+        At(sprintState, crouchState, new FuncPredicate(() => CanCrouch()));
 
         // SET INTITIAL STATE
         stateMachine.SetState(idleState);
     }
     private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
     private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
+    private bool CanIdle() => !isMoving && !crouchPressed && isGrounded();
+    private bool CanWalk() => isMoving && isGrounded() && !isSprinting && !crouchPressed;
+    private bool CanSprint() => isMoving && isGrounded() && isSprinting && !crouchPressed;
+    private bool CanJump() => !isGrounded();
+    private bool CanCrouch() => isGrounded() && crouchPressed;
+    private bool CanAttack() => inputReader.attackPressed && isGrounded();
 }

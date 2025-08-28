@@ -8,7 +8,6 @@ namespace Game
 
         public override void OnEnter()
         {
-            Debug.Log("Enemy Entered Idle State");
             anim.Play(IdleHash);
         }
         public override void Update()

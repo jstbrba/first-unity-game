@@ -12,7 +12,6 @@ namespace Game
         }
         public override void OnEnter()
         {
-            Debug.Log("Entering attack state");
             anim.Play(playerAttack.currentStrategy.animHash);
             attackFinished = false;
 

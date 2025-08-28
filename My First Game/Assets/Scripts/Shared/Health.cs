@@ -16,14 +16,9 @@ public class Health : MonoBehaviour
     {
         currentHealth = (int)Mathf.Clamp(currentHealth - _damage, 0, maxHealth);
 
-        if (currentHealth > 0)
+        if (currentHealth == 0)
         {
-            Debug.Log(gameObject.name + " took " + _damage + " damage");
-        } else
-        {
-            Debug.Log(gameObject.name + " is dead");
-            gameObject.SetActive(false);
-            // Destroy(gameObject); // TODO: Use object pooling instead
+            Destroy(gameObject);
         }
         OnHealthChange?.Invoke(currentHealth, maxHealth);
     }

@@ -3,10 +3,14 @@ using UnityEngine;
 namespace Game
 {
     public class EnemySpawner : MonoBehaviour {
+        [Header("Enemy Data")]
         [SerializeField] private List<EnemyData> enemyData;
+
+        [Header("Spawn Settings")]
         [SerializeField] private int maxEnemies = 5;
         [SerializeField] private float spawnInterval = 5f;
 
+        [Header("Spawn Points")]
         [SerializeField] private List<Transform> spawnPoints;
 
         EnemyFactory enemyFactory;
@@ -31,7 +35,7 @@ namespace Game
             EnemyData data = enemyData[Random.Range(0, enemyData.Count)];
             Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
 
-            // TODO: Enemy pooling
+            // TODO : Optimisation - Use flyweight pattern for object pooling
             enemyFactory.CreateEnemy(data, spawnPoint);
             enemyCount++;
         }

@@ -4,7 +4,6 @@ public class MeleeStrategy : AttackStrategy
 {
     public override void Attack(Transform origin)
     {
-        Debug.Log("Performing light attack");
         float direction = Mathf.Sign(origin.localScale.x);
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(new Vector2(origin.position.x + direction * range, origin.position.y), HitBoxSize, 0f);

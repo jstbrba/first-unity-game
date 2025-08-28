@@ -9,10 +9,5 @@ public class GameManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
-    public void UpdateMoney(int amount)
-    {
-        Debug.Log(Money + " + " + Mathf.Max(Money + amount));
-        Money = Mathf.Max(0, Money + amount);
-        Debug.Log(Money);
-    }
+    public void UpdateMoney(int amount) => Money = Mathf.Max(0, Money + amount);
 }

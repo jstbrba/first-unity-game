@@ -8,7 +8,6 @@ namespace Game
 
         public override void OnEnter()
         {
-            Debug.Log("Entering Crouch State");
             anim.Play(CrouchHash);
         }
     }

@@ -4,7 +4,9 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
-    public int currentHealth { get; private set; }
+    private int currentHealth;
+    public int CurrentHealth => currentHealth;
+    public void SetCurrentHealth(int health) => currentHealth = health;
 
     public event Action<int,int> OnHealthChange;
 
@@ -18,7 +20,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth == 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         OnHealthChange?.Invoke(currentHealth, maxHealth);
     }

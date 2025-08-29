@@ -31,7 +31,7 @@ public abstract class AttackStrategy : ScriptableObject
             {
                 Health health = hit.GetComponent<Health>();
                 if (health != null) health.TakeDamage(damage);
-                if (health.currentHealth == 0) moneyChannel.Invoke(hit.GetComponent<Enemy>().MoneyOnDeath);
+                if (health.CurrentHealth == 0) moneyChannel.Invoke(hit.GetComponent<Enemy>().MoneyOnDeath);
             }
         }
     }

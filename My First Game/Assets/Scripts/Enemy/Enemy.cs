@@ -16,6 +16,7 @@ namespace Game
         private Vector3 originalScale;
 
         private StateMachine stateMachine;
+        private EnemyIdleState idleState;
 
         private Health health;
         private float lowHealthThreshold = 2;
@@ -23,6 +24,7 @@ namespace Game
         private EnemyAttack enemyAttack;
 
         public int MoneyOnDeath => moneyOnDeath;
+
 
         private void Awake()
         {
@@ -34,6 +36,10 @@ namespace Game
             originalScale = transform.localScale;
 
             ConfigureStateMachine();
+        }
+        private void OnEnable()
+        {
+            stateMachine.SetState(idleState);
         }
         private void Update()
         {
@@ -53,12 +59,12 @@ namespace Game
                 transform.localScale = originalScale;
         }
 
-        private bool IsLowHealth => (health.currentHealth <= lowHealthThreshold);
+        private bool IsLowHealth => (health.CurrentHealth <= lowHealthThreshold);
         private void ConfigureStateMachine()
         {
             stateMachine = new StateMachine();
 
-            var idleState = new EnemyIdleState(this, anim);
+            idleState = new EnemyIdleState(this, anim);
             var chaseState = new EnemyChaseState(this, anim);
             var retreatState = new EnemyRetreatState(this, anim);
             var attackState = new EnemyAttackState(this, anim, enemyAttack);
@@ -75,7 +81,7 @@ namespace Game
             Any(attackState, new FuncPredicate(() => playerDetector.CanAttack() && !enemyAttack.IsRunning));
 
 
-            stateMachine.SetState(idleState);
+            // stateMachine.SetState(idleState);
         }
 
         private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);

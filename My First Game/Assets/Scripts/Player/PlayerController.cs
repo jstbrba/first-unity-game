@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private bool crouchPressed;
     private bool isSprinting;
     private bool isAttacking;
-    public float moveDir { get; private set; }
 
     private StateMachine stateMachine;
 
@@ -41,13 +40,8 @@ public class PlayerController : MonoBehaviour
         jumpPressed = inputReader.jumpPressed;
         crouchPressed = inputReader.crouchPressed;
 
-        // FLIP CHARACTER
         if (Mathf.Abs(horizontalInput) > 0)
-        {
-            moveDir = Mathf.Sign(horizontalInput);
-            transform.localScale = new Vector3(moveDir * 1.5f, 1.5f, 1.5f);
-        }
-        else moveDir = 0;
+            transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 1.5f, 1.5f, 1.5f);
 
         stateMachine.Update();
 
@@ -63,6 +57,7 @@ public class PlayerController : MonoBehaviour
         return hit.collider != null;
     }
 
+    // FIXME : Player does a super jump if you quickly tap jump, release, then hold it.
     public void HandleJump()
     {
         if (jumpPressed && isGrounded())

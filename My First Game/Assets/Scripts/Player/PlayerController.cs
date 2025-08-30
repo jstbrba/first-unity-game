@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         crouchPressed = inputReader.crouchPressed;
 
         if (Mathf.Abs(horizontalInput) > 0)
-            transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 1.5f, 1.5f, 1.5f);
+            transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 1f, 1f, 1f);
 
         stateMachine.Update();
 

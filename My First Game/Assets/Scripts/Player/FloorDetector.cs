@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 namespace Game {
-    public class RoomDetector : MonoBehaviour {
+    public class FloorDetector : MonoBehaviour {
         private CameraController cam;
 
         private void Start()

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private PlayerAttack playerAttack;
     private InputReader inputReader;
+    private float originalXScale;
 
     private float horizontalInput;
     private bool isMoving => horizontalInput != 0;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         inputReader = GetComponent<InputReader>();
 
+        originalXScale = transform.localScale.x;
+
         ConfigureStateMachine();
     }
 
@@ -41,7 +44,7 @@ public class PlayerController : MonoBehaviour
         crouchPressed = inputReader.crouchPressed;
 
         if (Mathf.Abs(horizontalInput) > 0)
-            transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 1f, 1f, 1f);
+            transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * originalXScale, transform.localScale.y, transform.localScale.z);
 
         stateMachine.Update();
 

@@ -4,7 +4,7 @@ namespace Game
     public class CameraController : MonoBehaviour
     {
         [SerializeField] private Transform Player;
-        private BoxCollider2D roomBounds;
+        private BoxCollider2D floorBounds;
 
         private float halfHeight;
         private float halfWidth;
@@ -20,17 +20,17 @@ namespace Game
         }
         private void Update()
         {
-            if (Player == null || roomBounds == null) return;
+            if (Player == null || floorBounds == null) return;
 
             Vector3 targetPosition;
 
             float xClamp = Mathf.Clamp(Player.position.x,
-                roomBounds.bounds.min.x + halfWidth,
-                roomBounds.bounds.max.x - halfWidth);
+                floorBounds.bounds.min.x + halfWidth,
+                floorBounds.bounds.max.x - halfWidth);
 
             float yClamp = Mathf.Clamp(Player.position.y,
-                roomBounds.bounds.min.y + halfHeight,
-                roomBounds.bounds.max.y - halfHeight);
+                floorBounds.bounds.min.y + halfHeight,
+                floorBounds.bounds.max.y - halfHeight);
 
             targetPosition = new Vector3(xClamp, yClamp, transform.position.z);
 
@@ -42,7 +42,8 @@ namespace Game
         }
         public void SetRoom(BoxCollider2D newBounds)
         {
-            roomBounds = newBounds;
+            if (newBounds.CompareTag("CameraBounds"))
+                floorBounds = newBounds;
         }
     }
 }

@@ -7,7 +7,7 @@ public abstract class BaseTimeState : IState
     protected static readonly Color nightColour = new Color(23f / 255f, 36f / 255f, 66f / 255f);
     protected Color targetColour;
 
-    protected float lerpSpeed = 1f;
+    protected float lerpSpeed = 0.2f;
 
     protected DayNightCycle dayCycle;
     protected SpriteRenderer background;

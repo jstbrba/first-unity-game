@@ -1,7 +1,7 @@
 using Game;
 using UnityEngine;
 
-public class Stairs : MonoBehaviour
+public class Teleporter : MonoBehaviour
 {
     [SerializeField] private Transform destination;
     private bool inRange;

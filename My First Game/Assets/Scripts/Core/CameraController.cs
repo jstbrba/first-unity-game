@@ -34,11 +34,19 @@ namespace Game
 
             targetPosition = new Vector3(xClamp, yClamp, transform.position.z);
 
-            transform.position = Vector3.SmoothDamp(
-                transform.position,
-                targetPosition,
-                ref velocity,
-                1f / smoothSpeed);
+            float distance = Vector3.Distance(transform.position, targetPosition);
+            Debug.Log(distance);
+
+            if (distance < 10f)
+            {
+                transform.position = Vector3.SmoothDamp(
+                    transform.position,
+                    targetPosition,
+                    ref velocity,
+                    1f / smoothSpeed);
+            }
+            else
+                transform.position = targetPosition;
         }
         public void SetRoom(BoxCollider2D newBounds)
         {

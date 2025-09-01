@@ -4,29 +4,39 @@ public class Shutter : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float shutterSpeed;
+    [SerializeField] private Generator gen;
     private Vector3 originalPosition;
     [SerializeField] private BoxCollider2D boxCollider;
 
     private bool isOn = true;
+    private bool isGenOn = true;
 
     private void Start()
     {
         originalPosition = transform.position;
     }
+    private void OnEnable()
+    {
+        gen.OnPowerDown += Shutter_OnPowerDown;
+    }
+    private void OnDisable()
+    {
+        gen.OnPowerDown -= Shutter_OnPowerDown;
+    }
     private void Update()
     {
-        // TODO : Add switch for player to interact with to open/close doors
-        // TODO : Connect the shutters to a generator
         if (Input.GetMouseButtonDown(0)) isOn = !isOn;
 
-        if (isOn && !isClosed())
-        {
-            transform.Translate(0f, -shutterSpeed * Time.deltaTime, 0f);
-        }
-        else if (!isOn && transform.position.y <= originalPosition.y)
-        {
-            transform.Translate(0f, shutterSpeed * Time.deltaTime, 0f);
-        }
+
+        
+            if (isOn && !isClosed() && isGenOn)
+            {
+                transform.Translate(0f, -shutterSpeed * Time.deltaTime, 0f);
+            }
+            else if ((!isOn || !isGenOn) && transform.position.y <= originalPosition.y)
+            {
+                transform.Translate(0f, shutterSpeed * Time.deltaTime, 0f);
+            }
     }
 
     private bool isClosed()
@@ -38,4 +48,5 @@ public class Shutter : MonoBehaviour
     {
         isOn = !isOn;
     }
+    private void Shutter_OnPowerDown() => isGenOn = false;
 }

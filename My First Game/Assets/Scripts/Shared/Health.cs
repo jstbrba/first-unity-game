@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public void SetCurrentHealth(int health) => currentHealth = health;
 
     public event Action<int,int> OnHealthChange;
+    public event Action OnDeath;
 
     private void OnEnable()
     {
@@ -20,7 +21,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth == 0)
         {
-            gameObject.SetActive(false);
+            OnDeath?.Invoke();
         }
         OnHealthChange?.Invoke(currentHealth, maxHealth);
     }

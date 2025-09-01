@@ -40,6 +40,11 @@ namespace Game
         private void OnEnable()
         {
             stateMachine.SetState(idleState);
+            health.OnDeath += HandleDeath;
+        }
+        private void OnDisable()
+        {
+            health.OnDeath -= HandleDeath;
         }
         private void Update()
         {
@@ -86,5 +91,6 @@ namespace Game
 
         private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
         private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
+        private void HandleDeath() => gameObject.SetActive(false);
     }
 }

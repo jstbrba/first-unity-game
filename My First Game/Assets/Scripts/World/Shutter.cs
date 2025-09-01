@@ -25,18 +25,14 @@ public class Shutter : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) isOn = !isOn;
-
-
-        
-            if (isOn && !isClosed() && isGenOn)
-            {
-                transform.Translate(0f, -shutterSpeed * Time.deltaTime, 0f);
-            }
-            else if ((!isOn || !isGenOn) && transform.position.y <= originalPosition.y)
-            {
-                transform.Translate(0f, shutterSpeed * Time.deltaTime, 0f);
-            }
+        if (isOn && !isClosed() && isGenOn)
+        {
+            transform.Translate(0f, -shutterSpeed * Time.deltaTime, 0f);
+        }
+        else if ((!isOn || !isGenOn) && transform.position.y <= originalPosition.y)
+        {
+            transform.Translate(0f, shutterSpeed * Time.deltaTime, 0f);
+        }
     }
 
     private bool isClosed()

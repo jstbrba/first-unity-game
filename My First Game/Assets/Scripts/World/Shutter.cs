@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Shutters : MonoBehaviour
+public class Shutter : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float shutterSpeed;
@@ -27,12 +27,15 @@ public class Shutters : MonoBehaviour
         {
             transform.Translate(0f, shutterSpeed * Time.deltaTime, 0f);
         }
-        Debug.Log("Is CLOSED: " + isClosed() + " Is ON: " + isOn);
     }
 
     private bool isClosed()
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector3(0f, boxCollider.bounds.min.y, 0f), Vector3.down, 0.01f, groundLayer);
         return hit.collider != null;
+    }
+    public void ToggleSwitch()
+    {
+        isOn = !isOn;
     }
 }

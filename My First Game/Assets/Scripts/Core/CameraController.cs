@@ -11,6 +11,7 @@ namespace Game
 
         [SerializeField] private float smoothSpeed = 5f;
         private Vector3 velocity = Vector3.zero;
+        [SerializeField] private float snapDistance = 5f; // If player is too far from camera, then it snaps to the player
 
         private void Start()
         {
@@ -37,7 +38,7 @@ namespace Game
             float distance = Vector3.Distance(transform.position, targetPosition);
             Debug.Log(distance);
 
-            if (distance < 10f)
+            if (distance < snapDistance)
             {
                 transform.position = Vector3.SmoothDamp(
                     transform.position,

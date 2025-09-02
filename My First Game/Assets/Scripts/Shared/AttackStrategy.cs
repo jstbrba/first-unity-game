@@ -11,10 +11,6 @@ public abstract class AttackStrategy : ScriptableObject
     [SerializeField] protected float range;
     [SerializeField] protected Vector2 hitBoxSize = new Vector2(1f, 1f);
 
-    [Header("Event Channels")]
-    // TODO: Move the money channel somewhere else cos it doesn't make sense for it to be here.
-    [SerializeField] private IntEventChannel moneyChannel;
-
     public float Range => range;
     public Vector2 HitBoxSize => hitBoxSize;
 
@@ -31,7 +27,6 @@ public abstract class AttackStrategy : ScriptableObject
             {
                 Health health = hit.GetComponent<Health>();
                 if (health != null) health.TakeDamage(damage);
-                if (health.CurrentHealth == 0) moneyChannel.Invoke(hit.GetComponent<Enemy>().MoneyOnDeath);
             }
         }
     }

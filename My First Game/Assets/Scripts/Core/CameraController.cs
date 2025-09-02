@@ -36,7 +36,6 @@ namespace Game
             targetPosition = new Vector3(xClamp, yClamp, transform.position.z);
 
             float distance = Vector3.Distance(transform.position, targetPosition);
-            Debug.Log(distance);
 
             if (distance < snapDistance)
             {

@@ -196,9 +196,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   damage: 3
+  attackCoolDownTime: 3
   closeRangeBox: {x: 4.03, y: 3.88}
   closeAttackDistance: 0.61
-  attackCoolDownTime: 3
 --- !u!95 &741623651530418359
 Animator:
   serializedVersion: 7
@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a67f5ac3f0ef3f4a93b209f9fc26296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyChannel: {fileID: 11400000, guid: 6a75ade36b3d48045bf1c34cfaeb520a, type: 2}
 --- !u!114 &4359006501300039801
 MonoBehaviour:
   m_ObjectHideFlags: 0

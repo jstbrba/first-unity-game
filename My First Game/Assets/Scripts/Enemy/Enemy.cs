@@ -4,7 +4,7 @@ namespace Game
 {
     public class Enemy : MonoBehaviour
     {
-
+        [SerializeField] private IntEventChannel moneyChannel;
         private float movementSpeed = 1.5f;
         public void SetMovementSpeed(float speed) => movementSpeed = Mathf.Max(0, speed);
         private int moneyOnDeath = 20;
@@ -22,9 +22,6 @@ namespace Game
         private float lowHealthThreshold = 2;
 
         private EnemyAttack enemyAttack;
-
-        public int MoneyOnDeath => moneyOnDeath;
-
 
         private void Awake()
         {
@@ -91,6 +88,10 @@ namespace Game
 
         private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
         private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
-        private void HandleDeath() => gameObject.SetActive(false);
+        private void HandleDeath()
+        {
+            moneyChannel.Invoke(moneyOnDeath);
+            gameObject.SetActive(false);
+        }
     }
 }

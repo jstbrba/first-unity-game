@@ -8,5 +8,6 @@ namespace Game
         public bool crouchPressed => Input.GetKey(KeyCode.S);
         public bool sprintPressed => Input.GetKey(KeyCode.LeftShift);
         public bool interactPressed => Input.GetKeyDown(KeyCode.E);
+        public bool placePressed => Input.GetKeyDown(KeyCode.F);
     }
 }

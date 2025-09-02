@@ -47,6 +47,7 @@ public class Turret : MonoBehaviour
 
     public void Fire()
     {
-        projectileFactory.CreateProjectile(projectileData, firePoint);
+        int direction = (int) Mathf.Sign(transform.localScale.x);
+        projectileFactory.CreateProjectile(projectileData, firePoint, direction);
     }
 }

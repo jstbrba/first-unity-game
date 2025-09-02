@@ -260,7 +260,7 @@ MonoBehaviour:
   fireRate: 0.5
   firePoint: {fileID: 3477420752691450365}
   enemyDetector: {fileID: 5190052823013495944}
-  projectilePrefab: {fileID: 1992711185516156733, guid: d0ad7a7ccc7fa01449b389ed621d6c20, type: 3}
+  projectileData: {fileID: 11400000, guid: fa681c826af0ee74682a8ea48b7c0568, type: 2}
 --- !u!114 &5763397870956384629
 MonoBehaviour:
   m_ObjectHideFlags: 0

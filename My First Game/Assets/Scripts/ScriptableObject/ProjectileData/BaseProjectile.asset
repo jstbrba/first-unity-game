@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357f388ab7d0d914c970c4fa86bba82a, type: 3}
   m_Name: BaseProjectile
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 0}
-  damage: 0
-  speed: 0
-  lifetime: 0
+  ProjectilePrefab: {fileID: 1992711185516156733, guid: d0ad7a7ccc7fa01449b389ed621d6c20, type: 3}
+  damage: 1
+  speed: 10
+  lifetime: 3

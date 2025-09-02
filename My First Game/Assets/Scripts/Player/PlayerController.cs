@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack playerAttack;
     private InputReader inputReader;
     private Health health;
+    private TrapPlacer trapPlacer;
     private float originalXScale;
 
     private float horizontalInput;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         inputReader = GetComponent<InputReader>();
         health = GetComponent<Health>();
+        trapPlacer = GetComponent<TrapPlacer>();
 
         originalXScale = transform.localScale.x;
 
@@ -54,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
         if (Mathf.Abs(horizontalInput) > 0)
             transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * originalXScale, transform.localScale.y, transform.localScale.z);
+
+        if (inputReader.placePressed) trapPlacer.Place();
 
         stateMachine.Update();
 

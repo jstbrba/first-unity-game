@@ -9,9 +9,11 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private EnemyDetector enemyDetector;
 
-    public float FireRate => fireRate;
+    [Header("Ammo Settings")]
+    [SerializeField] private ProjectileData projectileData;
+    private ProjectileFactory projectileFactory;
 
-    [SerializeField] private GameObject projectilePrefab;
+    public float FireRate => fireRate;
 
     private Health health;
     private StateMachine stateMachine;
@@ -20,6 +22,7 @@ public class Turret : MonoBehaviour
     {
         health = GetComponent<Health>();
 
+        projectileFactory = new ProjectileFactory();
         stateMachine = new StateMachine();
 
         InactiveTurretState inactiveState = new InactiveTurretState(this);
@@ -44,8 +47,6 @@ public class Turret : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log("Fire!");
-        GameObject projectile = GameObject.Instantiate(projectilePrefab);
-        projectile.transform.position = firePoint.position;
+        projectileFactory.CreateProjectile(projectileData, firePoint);
     }
 }

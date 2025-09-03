@@ -41,7 +41,7 @@ public class EnemyAttack : MonoBehaviour
 
         if (shortHit)
         {
-            shortHit.GetComponent<Health>().TakeDamage(damage);
+            shortHit.GetComponent<PlayerHealth>().Model.TakeDamage(damage);
         }
     }
     private void ResetCooldown() => attackCountdown.Start();

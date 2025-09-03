@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private PlayerAttack playerAttack;
     private InputReader inputReader;
-    private Health health;
+    private PlayerHealth health;
     private TrapPlacer trapPlacer;
     private float originalXScale;
 
@@ -32,21 +32,21 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
         inputReader = GetComponent<InputReader>();
-        health = GetComponent<Health>();
+        health = GetComponent<PlayerHealth>();
         trapPlacer = GetComponent<TrapPlacer>();
 
         originalXScale = transform.localScale.x;
 
         ConfigureStateMachine();
     }
-    private void OnEnable()
-    {
-        health.OnDeath += HandleDeath;
-    }
-    private void OnDisable()
-    {
-        health.OnDeath -= HandleDeath;
-    }
+    //private void OnEnable()
+    //{
+    //    health.OnDeath += HandleDeath;
+    //}
+    //private void OnDisable()
+    //{
+    //    health.OnDeath -= HandleDeath;
+    //}
     private void Update()
     {
         horizontalInput = inputReader.moveAxis;

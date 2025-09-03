@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1379291209365508152}
   - component: {fileID: 4021336144464446609}
-  - component: {fileID: 8068393760876343735}
   - component: {fileID: -7833130276067769259}
   m_Layer: 0
   m_Name: Projectile
@@ -89,21 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8068393760876343735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992711185516156733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78904ebc286b48749a1e5b8edba345fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  speed: 8
-  lifetime: 5
 --- !u!61 &-7833130276067769259
 BoxCollider2D:
   m_ObjectHideFlags: 0

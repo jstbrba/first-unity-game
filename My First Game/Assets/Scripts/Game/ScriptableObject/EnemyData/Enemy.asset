@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e26abdb93f3c1d44ad98116720276cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 272bb6ed72d2a3d44998419ab28ab50f, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 3120645457077790973, guid: 7a79fadbc3b15464489600d73d57c7b7, type: 3}
-  maxHealth: 6
-  speed: 1.5
-  MoneyOnDeath: 20
+  type: 0
+  prefab: {fileID: 0}
+  maxHealth: 0
+  speed: 0
+  moneyOnDeath: 0

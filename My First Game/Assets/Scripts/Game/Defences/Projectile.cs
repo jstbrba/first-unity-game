@@ -7,6 +7,9 @@ public class Projectile : Flyweight
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb;
+    private int direction = 1;
+    private bool isReleased = false;
+    public void SetDirection(int direction) => this.direction = direction;
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -14,18 +17,19 @@ public class Projectile : Flyweight
     }
     private void OnEnable()
     {
+        isReleased = false;
         StartCoroutine(despawnAfterDelay(settings.despawnDelay));
     }
 
     private void Update()
     {
-        transform.Translate(transform.right * settings.speed * Time.deltaTime);
+        transform.position += new Vector3(direction * settings.speed * Time.deltaTime, 0, 0);
     }
 
     private IEnumerator despawnAfterDelay(float delay)
     {
         yield return Helpers.GetWaitForSeconds(delay);
-        Destroy(gameObject);
+        ReleaseSelf();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -33,7 +37,13 @@ public class Projectile : Flyweight
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Health>().TakeDamage(settings.damage);
-            FlyweightFactory.ReturnToPool(this);
+            ReleaseSelf();
         }
+    }
+    private void ReleaseSelf()
+    {
+        if (isReleased) return;
+        isReleased = true;
+        FlyweightFactory.ReturnToPool(this);
     }
 }

@@ -12,7 +12,7 @@ public class TrapPlacer : MonoBehaviour
 
         GameObject turret = GameObject.Instantiate(turretPrefab);
         turret.transform.position = transform.position;
-        int direction = (int) Mathf.Sign(transform.localScale.x);
+        int direction = (int)Mathf.Sign(transform.localScale.x);
         turret.transform.localScale = new Vector3(turret.transform.localScale.x * direction, turret.transform.localScale.y, turret.transform.localScale.z);
         turretCount++;
     }

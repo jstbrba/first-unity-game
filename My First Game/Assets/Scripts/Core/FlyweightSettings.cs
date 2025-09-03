@@ -21,6 +21,7 @@ public class FlyweightSettings : ScriptableObject
 }
 public enum FlyweightType
 {
-    Projectile
+    Projectile,
+    Enemy
 }
 

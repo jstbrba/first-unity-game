@@ -4,7 +4,7 @@ namespace Game
 {
     public class EnemySpawner : MonoBehaviour {
         [Header("Enemy Data")]
-        [SerializeField] private List<EnemyData> enemyData;
+        [SerializeField] private List<EnemySettings> enemySettings;
 
         [Header("Spawn Settings")]
         [SerializeField] private float spawnInterval = 5f;
@@ -12,34 +12,14 @@ namespace Game
         [Header("Spawn Points")]
         [SerializeField] private List<Transform> spawnPoints;
 
-        [Header("Enemy Pool")]
-        [SerializeField] private int poolSize = 10;
-
-        private EnemyFactory enemyFactory;
-        private List<GameObject> enemyPool = new List<GameObject>();
-
         private float spawnTimer;
         private int enemyCount;
-
-        private void Start()
-        {
-            enemyFactory = new EnemyFactory();
-
-            for (int i = 0; i < poolSize; i++)
-            {
-                EnemyData data = enemyData[Random.Range(0, enemyData.Count)];
-                Transform spawnPoint = spawnPoints[0];
-                GameObject enemy = enemyFactory.CreateEnemy(data, spawnPoint);
-                enemy.SetActive(false);
-                enemyPool.Add(enemy);
-            }
-        }
 
         private void Update()
         {
             spawnTimer += Time.deltaTime;
 
-            if (ActiveEnemyCount() < poolSize && spawnTimer >= spawnInterval)
+            if (spawnTimer > spawnInterval)
             {
                 SpawnEnemy();
                 spawnTimer = 0;
@@ -47,25 +27,8 @@ namespace Game
         }
         private void SpawnEnemy()
         {
-            foreach (var enemy in enemyPool)
-            {
-                if (!enemy.activeInHierarchy)
-                {
-                    EnemyData data = enemyData[Random.Range(0, enemyData.Count)];
-                    Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-                    enemy.transform.position = spawnPoint.position;
-                    enemy.GetComponent<Health>().SetCurrentHealth(data.maxHealth);
-                    enemy.SetActive(true);
-                    return;
-                }
-            }
-        }
-        private int ActiveEnemyCount()
-        {
-            int count = 0;
-            foreach(var enemy in enemyPool)
-                if (enemy.activeInHierarchy) count++;
-            return count;
+            var enemy = FlyweightFactory.Spawn(enemySettings[Random.Range(0,enemySettings.Count)]);
+            enemy.transform.position = spawnPoints[Random.Range(0,spawnPoints.Count)].position;
         }
     }
 }

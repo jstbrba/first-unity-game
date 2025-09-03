@@ -46,7 +46,7 @@ public class Turret : MonoBehaviour
     public void Fire()
     {
         var projectile = FlyweightFactory.Spawn(projectileSettings);
-        projectile.transform.right = transform.right;
+        projectile.GetComponent<Projectile>().SetDirection((int)Mathf.Sign(transform.localScale.x));
         projectile.transform.position = firePoint.position;
     }
 }

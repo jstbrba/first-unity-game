@@ -1,14 +1,9 @@
 using UnityEngine;
-using Utilities;
 namespace Game
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : Flyweight
     {
-        [SerializeField] private IntEventChannel moneyChannel;
-        private float movementSpeed = 1.5f;
-        public void SetMovementSpeed(float speed) => movementSpeed = Mathf.Max(0, speed);
-        private int moneyOnDeath = 20;
-        public void SetMoneyOnDeath(int moneyOnDeath) => this.moneyOnDeath = Mathf.Max(0, moneyOnDeath);
+        new EnemySettings settings => (EnemySettings)base.settings;
 
         private Rigidbody2D body;
         private Animator anim;
@@ -28,6 +23,7 @@ namespace Game
             body = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             health = GetComponent<Health>();
+            health.SetMaxHealth(settings.maxHealth);
             enemyAttack = GetComponent<EnemyAttack>();
             playerDetector = GetComponent<PlayerDetector>();
             originalScale = transform.localScale;
@@ -51,8 +47,8 @@ namespace Game
         {
             stateMachine.FixedUpdate();
         }
-        public void Chase() => body.linearVelocity = new Vector2(movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
-        public void Retreat() => body.linearVelocity = new Vector2(-movementSpeed * playerDetector.Direction(), body.linearVelocity.y);
+        public void Chase() => body.linearVelocity = new Vector2(settings.speed * playerDetector.Direction(), body.linearVelocity.y);
+        public void Retreat() => body.linearVelocity = new Vector2(-settings.speed * playerDetector.Direction(), body.linearVelocity.y);
         public void FacePlayer()
         {
             if (playerDetector.Player.position.x < transform.position.x)
@@ -90,8 +86,8 @@ namespace Game
         private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
         private void HandleDeath()
         {
-            moneyChannel.Invoke(moneyOnDeath);
-            gameObject.SetActive(false);
+            settings.moneyChannel.Invoke(settings.moneyOnDeath);
+            FlyweightFactory.ReturnToPool(this);
         }
     }
 }

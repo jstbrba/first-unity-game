@@ -19,6 +19,8 @@ namespace Game
         {
             spawnTimer += Time.deltaTime;
 
+            if (Input.GetKeyDown(KeyCode.T)) DespawnEnemiesOutOfView(); 
+
             if (spawnTimer > spawnInterval)
             {
                 SpawnEnemy();
@@ -29,6 +31,19 @@ namespace Game
         {
             var enemy = FlyweightFactory.Spawn(enemySettings[Random.Range(0,enemySettings.Count)]);
             enemy.transform.position = spawnPoints[Random.Range(0,spawnPoints.Count)].position;
+        }
+        public void DespawnEnemiesOutOfView()
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in enemies)
+            {
+                if (enemy.GetComponent<PlayerDetector>().OutOfView())
+                {
+                    Enemy enemyComponent = enemy.GetComponent<Enemy>();
+                    FlyweightFactory.ReturnToPool(enemyComponent);
+                }
+            }
+                    
         }
     }
 }

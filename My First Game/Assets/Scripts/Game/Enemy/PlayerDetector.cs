@@ -9,6 +9,7 @@ namespace Game
         [SerializeField] private float safeRange;
         [SerializeField] private float closeRange = 1f;
         [SerializeField] private float attackRange; // change later so that attack's class colliders and this range match, probably make a da
+        [SerializeField] private float outOfViewRange = 20f;
         public float Direction() => Mathf.Sign(Player.position.x - transform.position.x);
 
         private void Start()
@@ -46,6 +47,11 @@ namespace Game
             float distance = Vector3.Distance(transform.position, Player.position);
             return distance < closeRange;
         }
-
+        public bool OutOfView()
+        {
+            if (!PlayerActive) return false;
+            float distance = Vector3.Distance(transform.position, Player.position);
+            return distance > outOfViewRange;
+        }
     }
 }

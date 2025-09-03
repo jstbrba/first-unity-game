@@ -51,7 +51,7 @@ namespace Game
         public void Retreat() => body.linearVelocity = new Vector2(-settings.speed * playerDetector.Direction(), body.linearVelocity.y);
         public void FacePlayer()
         {
-            if (playerDetector.Player.position.x < transform.position.x)
+            if (playerDetector.PlayerActive && playerDetector.Player.position.x < transform.position.x)
                 transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
             else
                 transform.localScale = originalScale;

@@ -139,5 +139,5 @@ public class PlayerController : MonoBehaviour
     private bool CanCrouch() => isGrounded() && crouchPressed;
     private bool CanAttack() => playerAttack.IsAttacking && isGrounded();
 
-    private void HandleDeath() => Destroy(gameObject);
+    private void HandleDeath() => gameObject.SetActive(false);
 }

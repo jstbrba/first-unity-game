@@ -447,13 +447,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93a214b4430f0b4a988179c17275f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData:
+  enemySettings:
   - {fileID: 11400000, guid: 5cd2e5b3c90e8cc4f8f86a8171258bdc, type: 2}
   spawnInterval: 5
   spawnPoints:
   - {fileID: 694967614}
   - {fileID: 1824776036}
-  poolSize: 10
 --- !u!4 &32701477
 Transform:
   m_ObjectHideFlags: 0

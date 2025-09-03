@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272bb6ed72d2a3d44998419ab28ab50f, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  type: 0
-  prefab: {fileID: 0}
-  maxHealth: 0
-  speed: 0
-  moneyOnDeath: 0
+  type: 1
+  prefab: {fileID: 56842007993350734, guid: 52109f95ad369fb40b578973bf28e30f, type: 3}
+  maxHealth: 6
+  speed: 1
+  moneyOnDeath: 20
+  moneyChannel: {fileID: 11400000, guid: 6a75ade36b3d48045bf1c34cfaeb520a, type: 2}

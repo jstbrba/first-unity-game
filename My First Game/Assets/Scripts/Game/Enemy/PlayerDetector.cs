@@ -13,30 +13,36 @@ namespace Game
 
         private void Start()
         {
-            Player = GameObject.FindGameObjectWithTag("Player").transform;
+            Player = GameObject.FindGameObjectWithTag("Player")?.transform;
         }
+        public bool PlayerActive => Player != null;
         public bool CanAttack()
         {
+            if (!PlayerActive) return false;
             var distanceToPlayer = Player.position - transform.position;
             return distanceToPlayer.magnitude <= attackRange;
         }
         public bool InRange()
         {
+            if (!PlayerActive) return false;
             float distance = Vector3.Distance(transform.position, Player.position);
             return distance < detectionRange;
         }
         public bool InAttackRange()
         {
+            if (!PlayerActive) return false;
             float distance = Vector3.Distance(transform.position, Player.position);
             return distance < attackRange;
         }
         public bool SafeRange()
         {
+            if (!PlayerActive) return false;
             float distance = Vector3.Distance(transform.position, Player.position);
             return distance > safeRange;
         }
         public bool CloseRange()
         {
+            if (!PlayerActive) return false;
             float distance = Vector3.Distance(transform.position, Player.position);
             return distance < closeRange;
         }

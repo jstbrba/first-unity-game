@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
         _model.Initialise(maxHealth);
         _context.ModelLocator.Register(_model);
 
-        _view.Initialise(_context, maxHealth);
+        _view.Initialise(_context, _model.MaxHealth);
         _context.ViewLocator.Register(_view);
 
         _controller = new HealthController(_model, _context);

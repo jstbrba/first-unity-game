@@ -940,6 +940,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &163019135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3990222562624052767, guid: 1f4d8770ae8fe3e4791b46b45fe48e53, type: 3}
+  m_PrefabInstance: {fileID: 6510953413589471466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &174556362
 GameObject:
   m_ObjectHideFlags: 0
@@ -8596,12 +8601,26 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6619358985992932339, guid: 1f4d8770ae8fe3e4791b46b45fe48e53, type: 3}
   m_PrefabInstance: {fileID: 6510953413589471466}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_GameObject: {fileID: 163019135}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4deea1ba62271454fa32ddfc243d8d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1367329065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163019135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903f8610b1625354799dc6199cdf5362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 1720766825}
+  maxHealth: 20
 --- !u!1 &1372889020
 GameObject:
   m_ObjectHideFlags: 0
@@ -11294,6 +11313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1720766823}
   - component: {fileID: 1720766824}
+  - component: {fileID: 1720766825}
   m_Layer: 5
   m_Name: HealthUI
   m_TagString: Untagged
@@ -11329,12 +11349,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720766822}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 919941206ccdb1a4cb3b96bccca1af62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1367329064}
+  healthBar: {fileID: 421501842}
+--- !u!114 &1720766825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720766822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cf7102e0577c6409d6f3d549ff6f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 163019135}
   healthBar: {fileID: 421501842}
 --- !u!1 &1725858685
 GameObject:
@@ -13529,10 +13563,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6619358985992932339, guid: 1f4d8770ae8fe3e4791b46b45fe48e53, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3990222562624052767, guid: 1f4d8770ae8fe3e4791b46b45fe48e53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1367329065}
   m_SourcePrefab: {fileID: 100100000, guid: 1f4d8770ae8fe3e4791b46b45fe48e53, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

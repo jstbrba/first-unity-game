@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class PlayerHealth : MonoBehaviour 
+public class Health : MonoBehaviour 
 {
     private IContext _context;
     private HealthController _controller;
@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
         _model.Initialise(maxHealth);
         _context.ModelLocator.Register(_model);
 
-        _view.Initialise(_context, _model.MaxHealth);
+        _view.Initialise(_context, _model.MaxHealth.Value);
         _context.ViewLocator.Register(_view);
 
         _controller = new HealthController(_model, _context);

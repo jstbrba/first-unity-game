@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5181139913496741488}
   - component: {fileID: 6739902779350486643}
   - component: {fileID: 4078221390250024986}
-  - component: {fileID: 6619358985992932339}
   - component: {fileID: 3928730319137636818}
   - component: {fileID: 5484535148237932619}
   - component: {fileID: 3456661559613922403}
@@ -166,7 +165,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -187,19 +186,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9d3e308c067e2d45bdf183499b34aef, type: 2}
   - {fileID: 11400000, guid: 54e4c256d9d1fb543933abc2d7e0f99a, type: 2}
   - {fileID: 11400000, guid: e57a537a97e182741bb0f5831284cdce, type: 2}
---- !u!114 &6619358985992932339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3990222562624052767}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4deea1ba62271454fa32ddfc243d8d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 50
 --- !u!95 &3928730319137636818
 Animator:
   serializedVersion: 7
@@ -318,4 +304,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 0}
-  maxHealth: 20
+  maxHealth: 50

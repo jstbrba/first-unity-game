@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   type: 1
-  prefab: {fileID: 56842007993350734, guid: 52109f95ad369fb40b578973bf28e30f, type: 3}
+  prefab: {fileID: 3120645457077790973, guid: 7a79fadbc3b15464489600d73d57c7b7, type: 3}
   maxHealth: 6
   speed: 1
   moneyOnDeath: 20

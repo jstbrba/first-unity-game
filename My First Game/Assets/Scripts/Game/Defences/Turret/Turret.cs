@@ -29,9 +29,9 @@ public class Turret : MonoBehaviour
 
         At(inactiveState, activeState, new FuncPredicate(() => enemyDetector.InRange));
         At(activeState, inactiveState, new FuncPredicate(() => !enemyDetector.InRange));
-        At(brokenState, inactiveState, new FuncPredicate(() => health.CurrentHealth > 0));
+        At(brokenState, inactiveState, new FuncPredicate(() => health.Model.Health.Value > 0));
 
-        Any(brokenState, new FuncPredicate(() => health.CurrentHealth == 0));
+        Any(brokenState, new FuncPredicate(() => health.Model.Health.Value == 0));
 
         stateMachine.SetState(inactiveState);
     }
@@ -48,5 +48,9 @@ public class Turret : MonoBehaviour
         var projectile = FlyweightFactory.Spawn(projectileSettings);
         projectile.GetComponent<Projectile>().SetDirection((int)Mathf.Sign(transform.localScale.x));
         projectile.transform.position = firePoint.position;
+    }
+    public void OnDeath()
+    {
+        Destroy(gameObject);
     }
 }

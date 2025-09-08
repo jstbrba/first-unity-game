@@ -32,4 +32,5 @@ public class Generator : MonoBehaviour
         OnPowerChange?.Invoke(currentPower, maxPower);
     }
     public void Repair(int value) => currentPower = Mathf.Clamp(currentPower + value, 0, maxPower);
+    public void HandleDeath() => gameObject.SetActive(false);
 }

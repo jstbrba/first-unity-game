@@ -2,9 +2,9 @@
 
 namespace Game
 {
-    public class PlayerDetector : MonoBehaviour 
+    public class PlayerDetector : MonoBehaviour
     {
-        public Transform Player {  get; private set; }
+        public Transform Player { get; private set; }
         [SerializeField] private float detectionRange;
         [SerializeField] private float safeRange;
         [SerializeField] private float closeRange = 1f;

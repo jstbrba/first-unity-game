@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private PlayerAttack playerAttack;
     private InputReader inputReader;
-    private PlayerHealth health;
+    private Health health;
     private TrapPlacer trapPlacer;
     private float originalXScale;
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
         inputReader = GetComponent<InputReader>();
-        health = GetComponent<PlayerHealth>();
+        health = GetComponent<Health>();
         trapPlacer = GetComponent<TrapPlacer>();
 
         originalXScale = transform.localScale.x;
@@ -139,5 +139,5 @@ public class PlayerController : MonoBehaviour
     private bool CanCrouch() => isGrounded() && crouchPressed;
     private bool CanAttack() => playerAttack.IsAttacking && isGrounded();
 
-    private void HandleDeath() => gameObject.SetActive(false);
+    public void HandleDeath() => gameObject.SetActive(false);
 }

@@ -8,9 +8,15 @@ public class Shutter : MonoBehaviour
     private Vector3 originalPosition;
     [SerializeField] private BoxCollider2D boxCollider;
 
+    private Health health;
+
     private bool isOn = true;
     private bool isGenOn = true;
 
+    private void Awake()
+    {
+        health = GetComponent<Health>();
+    }
     private void Start()
     {
         originalPosition = transform.position;
@@ -45,4 +51,8 @@ public class Shutter : MonoBehaviour
         isOn = !isOn;
     }
     private void Shutter_OnPowerDown() => isGenOn = false;
+    public void HandleDeath()
+    {
+        gameObject.SetActive(false);
+    }
 }

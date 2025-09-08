@@ -12,11 +12,13 @@ GameObject:
   - component: {fileID: 2418377245682995334}
   - component: {fileID: 4477726675672915453}
   - component: {fileID: 6916444028683405547}
-  - component: {fileID: 6959400759684190788}
   - component: {fileID: 7810429856906766693}
   - component: {fileID: 741623651530418359}
   - component: {fileID: 8039669441704667924}
   - component: {fileID: 4359006501300039801}
+  - component: {fileID: -4008511998916071588}
+  - component: {fileID: 9108047977685244797}
+  - component: {fileID: 7174350701923512083}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -34,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.34, y: 1.48, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,7 +118,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -167,19 +169,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.43323374, y: 0.81149805}
   m_EdgeRadius: 0
---- !u!114 &6959400759684190788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120645457077790973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4deea1ba62271454fa32ddfc243d8d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
 --- !u!114 &7810429856906766693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +186,7 @@ MonoBehaviour:
     m_Bits: 512
   damage: 3
   attackCoolDownTime: 3
-  closeRangeBox: {x: 4.03, y: 3.88}
+  closeRangeBox: {x: 2.61, y: 2.62}
   closeAttackDistance: 0.61
 --- !u!95 &741623651530418359
 Animator:
@@ -233,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a67f5ac3f0ef3f4a93b209f9fc26296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyChannel: {fileID: 11400000, guid: 6a75ade36b3d48045bf1c34cfaeb520a, type: 2}
+  settings: {fileID: 0}
 --- !u!114 &4359006501300039801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +235,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba12a74c897e8b94499db90c025c7317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 12
+  detectionRange: 20
   safeRange: 14
-  closeRange: 2
-  attackRange: 4
+  closeRange: 1
+  attackRange: 2
+  outOfViewRange: 24
+--- !u!114 &-4008511998916071588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903f8610b1625354799dc6199cdf5362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 9108047977685244797}
+  maxHealth: 10
+--- !u!114 &9108047977685244797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cf7102e0577c6409d6f3d549ff6f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8039669441704667924}
+        m_TargetAssemblyTypeName: Game.Enemy, Assembly-CSharp
+        m_MethodName: HandleDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  healthBar: {fileID: 0}
+--- !u!114 &7174350701923512083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5edae40a22f3184aaaf0288698073cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  boxCollider: {fileID: 6916444028683405547}
+  _detectionBox: {x: 1.74, y: 0.63}
+  _distance: 0.56

@@ -3,11 +3,12 @@ namespace Game
 {
     public class Enemy : Flyweight
     {
-        new EnemySettings settings => (EnemySettings)base.settings;
+        [HideInInspector] new EnemySettings settings => (EnemySettings)base.settings;
 
         private Rigidbody2D body;
         private Animator anim;
         private PlayerDetector playerDetector;
+        private TargetDetector targetDetector;
         private Vector3 originalScale;
 
         private StateMachine stateMachine;
@@ -23,9 +24,9 @@ namespace Game
             body = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             health = GetComponent<Health>();
-            health.SetMaxHealth(settings.maxHealth);
             enemyAttack = GetComponent<EnemyAttack>();
             playerDetector = GetComponent<PlayerDetector>();
+            targetDetector = GetComponent<TargetDetector>();
             originalScale = transform.localScale;
 
             ConfigureStateMachine();
@@ -33,11 +34,6 @@ namespace Game
         private void OnEnable()
         {
             stateMachine.SetState(idleState);
-            health.OnDeath += HandleDeath;
-        }
-        private void OnDisable()
-        {
-            health.OnDeath -= HandleDeath;
         }
         private void Update()
         {
@@ -57,7 +53,7 @@ namespace Game
                 transform.localScale = originalScale;
         }
 
-        private bool IsLowHealth => (health.CurrentHealth <= lowHealthThreshold);
+        private bool IsLowHealth => (health.Model.Health.Value <= lowHealthThreshold);
         private void ConfigureStateMachine()
         {
             stateMachine = new StateMachine();
@@ -67,7 +63,7 @@ namespace Game
             var retreatState = new EnemyRetreatState(this, anim);
             var attackState = new EnemyAttackState(this, anim, enemyAttack);
 
-            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange() && !playerDetector.InAttackRange()));
+            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange() && !playerDetector.InAttackRange() && !targetDetector.TargetInRange()));
 
             At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange() || playerDetector.InAttackRange()));
 
@@ -76,7 +72,7 @@ namespace Game
             At(retreatState, idleState, new FuncPredicate(() => IsLowHealth && playerDetector.SafeRange() || !IsLowHealth && playerDetector.InAttackRange()));
 
             Any(retreatState, new FuncPredicate(() => (IsLowHealth && !playerDetector.SafeRange() || playerDetector.CloseRange()) && enemyAttack.IsRunning));
-            Any(attackState, new FuncPredicate(() => playerDetector.CanAttack() && !enemyAttack.IsRunning));
+            Any(attackState, new FuncPredicate(() => (playerDetector.CanAttack() || targetDetector.TargetInRange()) && !enemyAttack.IsRunning));
 
 
             // stateMachine.SetState(idleState);
@@ -84,7 +80,7 @@ namespace Game
 
         private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
         private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
-        private void HandleDeath()
+        public void HandleDeath()
         {
             settings.moneyChannel.Invoke(settings.moneyOnDeath);
             FlyweightFactory.ReturnToPool(this);

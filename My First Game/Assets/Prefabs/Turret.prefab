@@ -220,7 +220,8 @@ GameObject:
   m_Component:
   - component: {fileID: 440932895215709090}
   - component: {fileID: 7080774155695960536}
-  - component: {fileID: 5763397870956384629}
+  - component: {fileID: 7779802423893298264}
+  - component: {fileID: 4666971933671146208}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -261,7 +262,7 @@ MonoBehaviour:
   firePoint: {fileID: 3477420752691450365}
   enemyDetector: {fileID: 5190052823013495944}
   projectileSettings: {fileID: 11400000, guid: 84a830a36fd674240b9b0364c731a443, type: 2}
---- !u!114 &5763397870956384629
+--- !u!114 &7779802423893298264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,7 +271,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 6691915702809422149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4deea1ba62271454fa32ddfc243d8d89, type: 3}
+  m_Script: {fileID: 11500000, guid: 903f8610b1625354799dc6199cdf5362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  _view: {fileID: 4666971933671146208}
+  maxHealth: 20
+--- !u!114 &4666971933671146208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6691915702809422149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cf7102e0577c6409d6f3d549ff6f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7080774155695960536}
+        m_TargetAssemblyTypeName: Turret, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  healthBar: {fileID: 0}

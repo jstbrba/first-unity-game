@@ -12,7 +12,7 @@ public class EnemyAttack : MonoBehaviour
     private CountdownTimer attackCountdown;
     [SerializeField] private float attackCoolDownTime = 3f;
 
-    [Header("Close-range Attack")]
+    [Header("Attack Range")]
     [SerializeField] private Vector2 closeRangeBox;
     [SerializeField] private float closeAttackDistance;
 
@@ -41,7 +41,8 @@ public class EnemyAttack : MonoBehaviour
 
         if (shortHit)
         {
-            shortHit.GetComponent<PlayerHealth>().Controller.ApplyDamage(damage);
+            shortHit.GetComponent<Health>().Controller.ApplyDamage(damage);
+            Debug.Log(shortHit.name + " hit. Health: " + shortHit.GetComponent<Health>().Model.Health.Value);
         }
     }
     private void ResetCooldown() => attackCountdown.Start();

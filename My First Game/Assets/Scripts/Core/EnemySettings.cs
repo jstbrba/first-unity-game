@@ -14,9 +14,10 @@ public class EnemySettings : FlyweightSettings
         go.SetActive(false);
         go.name = prefab.name;
 
-        var flyweight = go.AddComponent<Enemy>();
+        // var flyweight = go.AddComponent<Enemy>();
+        var flyweight = go.GetComponent<Enemy>();
         flyweight.settings = this;
-        go.GetComponent<Health>().SetMaxHealth(maxHealth);
+        // go.GetComponent<Health>().Controller.SetMaxHealth(maxHealth);
         return flyweight;
     }
 }

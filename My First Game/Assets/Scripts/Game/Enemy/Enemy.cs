@@ -14,7 +14,7 @@ namespace Game
         private StateMachine stateMachine;
         private EnemyIdleState idleState;
 
-        private Health health;
+        private EnemyMVC mvc;
         private float lowHealthThreshold = 2;
 
         private EnemyAttack enemyAttack;
@@ -23,7 +23,7 @@ namespace Game
         {
             body = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            health = GetComponent<Health>();
+            mvc = GetComponent<EnemyMVC>();
             enemyAttack = GetComponent<EnemyAttack>();
             playerDetector = GetComponent<PlayerDetector>();
             targetDetector = GetComponent<TargetDetector>();
@@ -53,7 +53,7 @@ namespace Game
                 transform.localScale = originalScale;
         }
 
-        private bool IsLowHealth => (health.Model.Health.Value <= lowHealthThreshold);
+        private bool IsLowHealth => (mvc.EnemyHealth.Model.Health.Value <= lowHealthThreshold);
         private void ConfigureStateMachine()
         {
             stateMachine = new StateMachine();

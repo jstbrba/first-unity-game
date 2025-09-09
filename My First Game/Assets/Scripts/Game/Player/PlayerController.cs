@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
         inputReader = GetComponent<InputReader>();
-        health = GetComponent<Health>();
+        health = GetComponent<PlayerMVC>().PlayerHealth;
         trapPlacer = GetComponent<TrapPlacer>();
 
         originalXScale = transform.localScale.x;

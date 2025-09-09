@@ -25,7 +25,7 @@ public abstract class AttackStrategy : ScriptableObject
         {
             if (hit.CompareTag("Enemy"))
             {
-                Health health = hit.GetComponent<Health>();
+                Health health = hit.GetComponent<EnemyMVC>().EnemyHealth;
                 if (health != null)
                 {
                     health.Controller.ApplyDamage(damage);

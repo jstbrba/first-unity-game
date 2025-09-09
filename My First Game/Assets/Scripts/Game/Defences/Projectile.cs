@@ -36,7 +36,7 @@ public class Projectile : Flyweight
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Health>().Controller.ApplyDamage((int)settings.damage);
+            collision.gameObject.GetComponent<EnemyMVC>().EnemyHealth.Controller.ApplyDamage((int)settings.damage);
             ReleaseSelf();
         }
     }

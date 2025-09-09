@@ -15,7 +15,7 @@ public class Shutter : MonoBehaviour
 
     private void Awake()
     {
-        health = GetComponent<Health>();
+        health = GetComponent<ShutterMVC>().ShutterHealth;
     }
     private void Start()
     {

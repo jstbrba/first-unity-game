@@ -19,7 +19,7 @@ public class Turret : MonoBehaviour
 
     private void Awake()
     {
-        health = GetComponent<Health>();
+        health = GetComponent<GeneratorMVC>().GeneratorHealth;
 
         stateMachine = new StateMachine();
 

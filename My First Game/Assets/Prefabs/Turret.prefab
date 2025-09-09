@@ -220,8 +220,8 @@ GameObject:
   m_Component:
   - component: {fileID: 440932895215709090}
   - component: {fileID: 7080774155695960536}
-  - component: {fileID: 7779802423893298264}
   - component: {fileID: 4666971933671146208}
+  - component: {fileID: 1399423081751696929}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -262,20 +262,6 @@ MonoBehaviour:
   firePoint: {fileID: 3477420752691450365}
   enemyDetector: {fileID: 5190052823013495944}
   projectileSettings: {fileID: 11400000, guid: 84a830a36fd674240b9b0364c731a443, type: 2}
---- !u!114 &7779802423893298264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6691915702809422149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 903f8610b1625354799dc6199cdf5362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _view: {fileID: 4666971933671146208}
-  maxHealth: 20
 --- !u!114 &4666971933671146208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,3 +290,16 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   healthBar: {fileID: 0}
+--- !u!114 &1399423081751696929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6691915702809422149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb68c223fdba1c42848f75eebb17c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthView: {fileID: 4666971933671146208}

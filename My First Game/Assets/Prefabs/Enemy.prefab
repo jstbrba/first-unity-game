@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 741623651530418359}
   - component: {fileID: 8039669441704667924}
   - component: {fileID: 4359006501300039801}
-  - component: {fileID: -4008511998916071588}
   - component: {fileID: 9108047977685244797}
   - component: {fileID: 7174350701923512083}
+  - component: {fileID: 7607940027292482376}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -240,20 +240,6 @@ MonoBehaviour:
   closeRange: 1
   attackRange: 2
   outOfViewRange: 24
---- !u!114 &-4008511998916071588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120645457077790973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 903f8610b1625354799dc6199cdf5362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _view: {fileID: 9108047977685244797}
-  maxHealth: 10
 --- !u!114 &9108047977685244797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,3 +286,16 @@ MonoBehaviour:
   boxCollider: {fileID: 6916444028683405547}
   _detectionBox: {x: 1.74, y: 0.63}
   _distance: 0.56
+--- !u!114 &7607940027292482376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7026e7350d0c6044bbf2a7d15b376c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthView: {fileID: 9108047977685244797}

@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 2418377245682995334}
   - component: {fileID: 4477726675672915453}
   - component: {fileID: 6916444028683405547}
-  - component: {fileID: 7810429856906766693}
   - component: {fileID: 741623651530418359}
-  - component: {fileID: 8039669441704667924}
-  - component: {fileID: 4359006501300039801}
-  - component: {fileID: 9108047977685244797}
-  - component: {fileID: 7174350701923512083}
-  - component: {fileID: 7607940027292482376}
+  - component: {fileID: -2332386001688319368}
+  - component: {fileID: 8107054904261384894}
+  - component: {fileID: -8270882639602251634}
+  - component: {fileID: 2497022388317113174}
+  - component: {fileID: 2652462622210528934}
+  - component: {fileID: -1251333317514983501}
+  - component: {fileID: -7058410717394175577}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -169,25 +170,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.43323374, y: 0.81149805}
   m_EdgeRadius: 0
---- !u!114 &7810429856906766693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120645457077790973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11250697c16bbbc44995ff634c527d8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  damage: 3
-  attackCoolDownTime: 3
-  closeRangeBox: {x: 2.61, y: 2.62}
-  closeAttackDistance: 0.61
 --- !u!95 &741623651530418359
 Animator:
   serializedVersion: 7
@@ -210,7 +192,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8039669441704667924
+--- !u!114 &-2332386001688319368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,11 +201,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3120645457077790973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a67f5ac3f0ef3f4a93b209f9fc26296, type: 3}
+  m_Script: {fileID: 11500000, guid: b0ae77952ec5cab42ba13f75e63ec027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 0}
---- !u!114 &4359006501300039801
+  _healthView: {fileID: 8107054904261384894}
+  _statsView: {fileID: -8270882639602251634}
+--- !u!114 &8107054904261384894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,15 +215,72 @@ MonoBehaviour:
   m_GameObject: {fileID: 3120645457077790973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba12a74c897e8b94499db90c025c7317, type: 3}
+  m_Script: {fileID: 11500000, guid: 07102cd86f6238f4db82492ecd589a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 20
-  safeRange: 14
+  _enemyTransform: {fileID: 0}
+--- !u!114 &-8270882639602251634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071a3c0a2818de24ba9722de47094e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2497022388317113174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5000b9ba71c4af0478c94c5ba8c84440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 5cd2e5b3c90e8cc4f8f86a8171258bdc, type: 2}
+--- !u!114 &2652462622210528934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a030397b19fe24095b6ebb80cd103b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  damage: 2
+  attackCoolDownTime: 3
+  closeRangeBox: {x: 2.07, y: 2.52}
+  closeAttackDistance: 0.77
+--- !u!114 &-1251333317514983501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120645457077790973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bda6f05c1170034b93f0a5974ebd923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 18
+  safeRange: 10
   closeRange: 1
   attackRange: 2
-  outOfViewRange: 24
---- !u!114 &9108047977685244797
+  outOfViewRange: 20
+--- !u!114 &-7058410717394175577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,53 +289,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3120645457077790973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cf7102e0577c6409d6f3d549ff6f7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8039669441704667924}
-        m_TargetAssemblyTypeName: Game.Enemy, Assembly-CSharp
-        m_MethodName: HandleDeath
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  healthBar: {fileID: 0}
---- !u!114 &7174350701923512083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120645457077790973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5edae40a22f3184aaaf0288698073cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fff47cff48a18b469780b98aaedfe55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
     m_Bits: 512
   boxCollider: {fileID: 6916444028683405547}
-  _detectionBox: {x: 1.74, y: 0.63}
-  _distance: 0.56
---- !u!114 &7607940027292482376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120645457077790973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7026e7350d0c6044bbf2a7d15b376c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthView: {fileID: 9108047977685244797}
+  _detectionBox: {x: 2, y: 2}
+  _distance: 4

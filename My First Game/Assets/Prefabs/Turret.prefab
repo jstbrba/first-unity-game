@@ -219,9 +219,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440932895215709090}
-  - component: {fileID: 7080774155695960536}
-  - component: {fileID: 4666971933671146208}
-  - component: {fileID: 1399423081751696929}
+  - component: {fileID: 1258806608081408248}
+  - component: {fileID: -6570103769672519272}
+  - component: {fileID: 1639170915998796400}
+  - component: {fileID: -1467658047252152962}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -246,7 +247,7 @@ Transform:
   - {fileID: 6084141640425022687}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7080774155695960536
+--- !u!114 &1258806608081408248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,14 +256,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6691915702809422149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ff4d4887499cc42b27480804cc46ca, type: 3}
+  m_Script: {fileID: 11500000, guid: e63164e4711fd3c4e9e892aed0b996b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.5
+  fireRate: 2
   firePoint: {fileID: 3477420752691450365}
   enemyDetector: {fileID: 5190052823013495944}
   projectileSettings: {fileID: 11400000, guid: 84a830a36fd674240b9b0364c731a443, type: 2}
---- !u!114 &4666971933671146208
+--- !u!114 &-6570103769672519272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,26 +272,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6691915702809422149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cf7102e0577c6409d6f3d549ff6f7c, type: 3}
+  m_Script: {fileID: 11500000, guid: d84bafd6063afda4a9d9bf29fd9d8af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7080774155695960536}
-        m_TargetAssemblyTypeName: Turret, Assembly-CSharp
-        m_MethodName: OnDeath
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  healthBar: {fileID: 0}
---- !u!114 &1399423081751696929
+  _healthView: {fileID: 1639170915998796400}
+--- !u!114 &1639170915998796400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,7 +285,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6691915702809422149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb68c223fdba1c42848f75eebb17c34, type: 3}
+  m_Script: {fileID: 11500000, guid: be1374b0a5268884f868ee3e02bfa91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthView: {fileID: 4666971933671146208}
+--- !u!114 &-1467658047252152962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6691915702809422149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f65068c32ef1b4a96715a7aced5ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

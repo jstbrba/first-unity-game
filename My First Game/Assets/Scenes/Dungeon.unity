@@ -6143,7 +6143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33abc1c0b83a514dbfa3d844b772046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthModel: {fileID: 11400000, guid: 903d1bda455be6a448a1b34a156aa78d, type: 2}
+  _baseHealthModel: {fileID: 11400000, guid: 903d1bda455be6a448a1b34a156aa78d, type: 2}
   _healthView: {fileID: 940519503}
 --- !u!1 &947972157
 GameObject:
@@ -11512,7 +11512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33abc1c0b83a514dbfa3d844b772046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthModel: {fileID: 11400000, guid: 903d1bda455be6a448a1b34a156aa78d, type: 2}
+  _baseHealthModel: {fileID: 11400000, guid: 903d1bda455be6a448a1b34a156aa78d, type: 2}
   _healthView: {fileID: 1484779527}
 --- !u!1 &1497360701
 GameObject:

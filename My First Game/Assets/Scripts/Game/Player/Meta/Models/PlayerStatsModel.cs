@@ -1,12 +1,6 @@
-﻿using UnityEngine;
-using Utilities;
-[CreateAssetMenu (fileName = "PlayerStats", menuName = "Models/Player/PlayerStats")]
+﻿using Utilities;
 public class PlayerStatsModel : BaseModel
 {
-    [SerializeField] private float _baseSpeed;
-    [SerializeField] private int _baseAttack;
-    [SerializeField] private float _baseJumpPower;
-
     public Observable<float> Speed { get { return _speed; } }
     public Observable<int> Attack {  get { return _attack; } }
     public Observable<float> JumpPower { get { return _jumpPower; } }
@@ -18,8 +12,8 @@ public class PlayerStatsModel : BaseModel
     {
         base.Initialise(context);
 
-        _speed.Value = _baseSpeed;
-        _attack.Value = _baseAttack;
-        _jumpPower.Value = _baseJumpPower;
+        _speed.Value = 6;
+        _attack.Value = 2;
+        _jumpPower.Value = 10; 
     }
 }

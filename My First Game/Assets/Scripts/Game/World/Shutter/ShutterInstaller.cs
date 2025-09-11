@@ -4,7 +4,6 @@ public class ShutterInstaller : MonoBehaviour, IDamageable
 {
     private IContext _context;
 
-    [SerializeField] private ShutterHealthModel _baseHealthModel;
     private ShutterHealthModel _healthModel;
     [SerializeField] private ShutterHealthView _healthView;
     private ShutterHealthController _healthController;
@@ -14,7 +13,7 @@ public class ShutterInstaller : MonoBehaviour, IDamageable
     {
         _context = new BaseContext();
 
-        _healthModel = Instantiate(_baseHealthModel);
+        _healthModel = new ShutterHealthModel();
         _healthModel.Initialise(_context);
         _context.ModelLocator.Register(_healthModel);
 

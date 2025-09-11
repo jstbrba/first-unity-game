@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using Utilities;
-[CreateAssetMenu(fileName = "PlayerHealth", menuName = "Models/Player/PlayerHealth")]
+﻿using Utilities;
 public class PlayerHealthModel : BaseModel
 {
-    [SerializeField] private int _baseMaxHealth;
     public Observable<int> MaxHealth { get { return _maxHealth; } }
     public Observable<int> CurrentHealth { get { return _currentHealth; } }
 
@@ -13,7 +10,7 @@ public class PlayerHealthModel : BaseModel
     {
         base.Initialise(context);
 
-        MaxHealth.Value = _baseMaxHealth;
+        MaxHealth.Value = 20;
         CurrentHealth.Value = MaxHealth.Value;
     }
 }

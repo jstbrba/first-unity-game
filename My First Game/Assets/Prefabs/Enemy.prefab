@@ -204,7 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ae77952ec5cab42ba13f75e63ec027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseHealthModel: {fileID: 11400000, guid: a81e1e0b05b5e8a4fbdad6b40f3ea408, type: 2}
   _healthView: {fileID: 8107054904261384894}
+  _baseStatsModel: {fileID: 11400000, guid: 0bb317cae52177c4e9c60d208349c573, type: 2}
   _statsView: {fileID: -8270882639602251634}
 --- !u!114 &8107054904261384894
 MonoBehaviour:
@@ -296,5 +298,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   boxCollider: {fileID: 6916444028683405547}
-  _detectionBox: {x: 2, y: 2}
-  _distance: 4

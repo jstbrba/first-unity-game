@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84bafd6063afda4a9d9bf29fd9d8af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthModel: {fileID: 11400000, guid: db37ddcc92ed3fb4c8affa2af8dca2b8, type: 2}
   _healthView: {fileID: 1639170915998796400}
 --- !u!114 &1639170915998796400
 MonoBehaviour:

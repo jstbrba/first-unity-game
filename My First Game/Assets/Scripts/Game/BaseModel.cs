@@ -1,4 +1,6 @@
-﻿public abstract class BaseModel : IModel
+﻿using UnityEngine;
+
+public abstract class BaseModel : ScriptableObject, IModel
 {
     public IContext Context { get {  return _context; } }
     private IContext _context;

@@ -17,6 +17,7 @@ public class EnemyHealthController : BaseController<EnemyHealthModel, EnemyHealt
     public void ApplyDamage(ApplyDamageCommand command)
     {
         _model.CurrentHealth.Value = Mathf.Max(0, _model.CurrentHealth.Value - command.Damage);
+        Debug.Log("Enemy took " +  command.Damage + " damage! Health is now at " + _model.CurrentHealth.Value);
     }
     public void Model_CurrentHealth_OnValueChanged(int previous, int current)
     {

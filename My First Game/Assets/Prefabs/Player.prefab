@@ -235,7 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4488c1111c2318544ba1627847316994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthModel: {fileID: 11400000, guid: 196da2762ca2f124ea9efaeb78957642, type: 2}
   _healthView: {fileID: 2666889878779010668}
+  _statsModel: {fileID: 11400000, guid: d1bc1c475fab9964e8cdc49def8f74cd, type: 2}
   _statsView: {fileID: 2770349862119830132}
 --- !u!114 &2666889878779010668
 MonoBehaviour:
@@ -274,9 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a63215bd03a884c8ec4cfc0fb49334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  jumpPower: 5
-  groundLayer:
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 256
 --- !u!114 &2354497702401915548

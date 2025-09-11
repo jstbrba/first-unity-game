@@ -4,30 +4,33 @@ namespace Game
     public class Enemy : Flyweight
     {
         private IContext _context;
+        private EnemyStatsModel _statsModel;
         [HideInInspector] new EnemySettings settings => (EnemySettings)base.settings;
+        private float _movementSpeed;
+        private int _moneyOnDeath;
 
-        private Rigidbody2D body;
-        private Animator anim;
-        private PlayerDetector playerDetector;
-        private TargetDetector targetDetector;
-        private Vector3 originalScale;
+        private Rigidbody2D _body;
+        private Animator _anim;
+        private PlayerDetector _playerDetector;
+        private TargetDetector _targetDetector;
+        private Vector3 _originalScale;
 
-        private StateMachine stateMachine;
-        private EnemyIdleState idleState;
+        private StateMachine _stateMachine;
+        private EnemyIdleState _idleState;
 
-        private float lowHealthThreshold = 2;
+        private float _lowHealthThreshold = 2;
         private bool _isLowHealth = false;
 
-        private EnemyAttack enemyAttack;
+        private EnemyAttack _enemyAttack;
 
         private void Awake()
         {
-            body = GetComponent<Rigidbody2D>();
-            anim = GetComponent<Animator>();
-            enemyAttack = GetComponent<EnemyAttack>();
-            playerDetector = GetComponent<PlayerDetector>();
-            targetDetector = GetComponent<TargetDetector>();
-            originalScale = transform.localScale;
+            _body = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+            _enemyAttack = GetComponent<EnemyAttack>();
+            _playerDetector = GetComponent<PlayerDetector>();
+            _targetDetector = GetComponent<TargetDetector>();
+            _originalScale = transform.localScale;
 
             ConfigureStateMachine();
         }
@@ -38,12 +41,16 @@ namespace Game
             _context.CommandBus.AddListener<HealthChangedCommand>(HealthCheck);
             _context.CommandBus.AddListener<DeathCommand>(HandleDeath);
 
-            _context.CommandBus.Dispatch(new SetSpeedCommand(settings.speed));
-            _context.CommandBus.Dispatch(new SetMoneyOnDeathCommand(settings.moneyOnDeath));
+            _statsModel = _context.ModelLocator.Get<EnemyStatsModel>();
+            _movementSpeed = _statsModel.Speed.Value;
+            _moneyOnDeath = _statsModel.MoneyOnDeath.Value;
+
+            _statsModel.Speed.onValueChanged += Model_Speed_OnValueChanged;
+            _statsModel.MoneyOnDeath.onValueChanged += Model_MoneyOnDeath_OnValueChanged;
         }
         private void OnEnable()
         {
-            stateMachine.SetState(idleState);
+            _stateMachine.SetState(_idleState);
 
             _context?.CommandBus.Dispatch(new RespawnCommand());
         }
@@ -54,47 +61,47 @@ namespace Game
         }
         private void Update()
         {
-            stateMachine.Update();
+            _stateMachine.Update();
         }
         private void FixedUpdate()
         {
-            stateMachine.FixedUpdate();
+            _stateMachine.FixedUpdate();
         }
-        public void Chase() => body.linearVelocity = new Vector2(settings.speed * playerDetector.Direction(), body.linearVelocity.y);
-        public void Retreat() => body.linearVelocity = new Vector2(-settings.speed * playerDetector.Direction(), body.linearVelocity.y);
+        public void Chase() => _body.linearVelocity = new Vector2(_movementSpeed * _playerDetector.Direction(), _body.linearVelocity.y);
+        public void Retreat() => _body.linearVelocity = new Vector2(-_movementSpeed * _playerDetector.Direction(), _body.linearVelocity.y);
         public void FacePlayer()
         {
-            if (playerDetector.PlayerActive && playerDetector.Player.position.x < transform.position.x)
-                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+            if (_playerDetector.PlayerActive && _playerDetector.Player.position.x < transform.position.x)
+                transform.localScale = new Vector3(-_originalScale.x, _originalScale.y, _originalScale.z);
             else
-                transform.localScale = originalScale;
+                transform.localScale = _originalScale;
         }
         private void ConfigureStateMachine()
         {
-            stateMachine = new StateMachine();
+            _stateMachine = new StateMachine();
 
-            idleState = new EnemyIdleState(this, anim);
-            var chaseState = new EnemyChaseState(this, anim);
-            var retreatState = new EnemyRetreatState(this, anim);
-            var attackState = new EnemyAttackState(this, anim, enemyAttack);
+            _idleState = new EnemyIdleState(this, _anim);
+            var chaseState = new EnemyChaseState(this, _anim);
+            var retreatState = new EnemyRetreatState(this, _anim);
+            var attackState = new EnemyAttackState(this, _anim, _enemyAttack);
 
-            At(idleState, chaseState, new FuncPredicate(() => playerDetector.InRange() && !playerDetector.InAttackRange() && !targetDetector.TargetInRange()));
+            At(_idleState, chaseState, new FuncPredicate(() => _playerDetector.InRange() && !_playerDetector.InAttackRange() && !_targetDetector.TargetInRange()));
 
-            At(chaseState, idleState, new FuncPredicate(() => !playerDetector.InRange() || playerDetector.InAttackRange()));
+            At(chaseState, _idleState, new FuncPredicate(() => !_playerDetector.InRange() || _playerDetector.InAttackRange()));
 
-            At(attackState, idleState, new FuncPredicate(() => attackState.IsAttackFinished));
+            At(attackState, _idleState, new FuncPredicate(() => attackState.IsAttackFinished));
 
-            At(retreatState, idleState, new FuncPredicate(() => _isLowHealth && playerDetector.SafeRange() || !_isLowHealth && playerDetector.InAttackRange()));
+            At(retreatState, _idleState, new FuncPredicate(() => _isLowHealth && _playerDetector.SafeRange() || !_isLowHealth && _playerDetector.InAttackRange()));
 
-            Any(retreatState, new FuncPredicate(() => (_isLowHealth && !playerDetector.SafeRange() || playerDetector.CloseRange()) && enemyAttack.IsRunning));
-            Any(attackState, new FuncPredicate(() => (playerDetector.CanAttack() || targetDetector.TargetInRange()) && !enemyAttack.IsRunning));
+            Any(retreatState, new FuncPredicate(() => (_isLowHealth && !_playerDetector.SafeRange() || _playerDetector.CloseRange()) && _enemyAttack.IsRunning));
+            Any(attackState, new FuncPredicate(() => (_playerDetector.CanAttack() || _targetDetector.TargetInRange()) && !_enemyAttack.IsRunning));
 
 
             // stateMachine.SetState(idleState);
         }
 
-        private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
-        private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
+        private void At(IState from, IState to, IPredicate condition) => _stateMachine.AddTransition(from, to, condition);
+        private void Any(IState to, IPredicate condition) => _stateMachine.AddAnyTransition(to, condition);
         public void HandleDeath(DeathCommand command)
         {
             settings.moneyChannel.Invoke(settings.moneyOnDeath);
@@ -102,7 +109,9 @@ namespace Game
         }
         public void HealthCheck(HealthChangedCommand command)
         {
-            _isLowHealth = command.Current < lowHealthThreshold ? true : false;
+            _isLowHealth = command.Current < _lowHealthThreshold ? true : false;
         }
+        public void Model_Speed_OnValueChanged(float previous, float current) => _movementSpeed = current;
+        public void Model_MoneyOnDeath_OnValueChanged(int previous, int current) => _moneyOnDeath = current;
     }
 }

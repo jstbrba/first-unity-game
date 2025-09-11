@@ -13,9 +13,6 @@ public class EnemyStatsController : BaseController<EnemyStatsModel, EnemyStatsVi
         _model.MoneyOnDeath.onValueChanged += Model_MoneyOnDeath_OnValueChanged;
 
         Context.CommandBus.AddListener<DeathCommand>(Health_OnDeath);
-        Context.CommandBus.AddListener<SetSpeedCommand>(OnSetSpeed);
-        Context.CommandBus.AddListener<SetAttackCommand>(OnSetAttack);
-        Context.CommandBus.AddListener<SetMoneyOnDeathCommand>(OnSetMoneyOnDeath);
     }
     public void Model_Speed_OnValueChanged(float previous, float current) 
     {
@@ -33,7 +30,4 @@ public class EnemyStatsController : BaseController<EnemyStatsModel, EnemyStatsVi
     {
         // send message to money MVC to give _model.MoneyOnDeath.Value
     }
-    public void OnSetSpeed(SetSpeedCommand command) => _model.Speed.Value = command.Speed;
-    public void OnSetAttack(SetAttackCommand command) => _model.Attack.Value = command.Attack;
-    public void OnSetMoneyOnDeath(SetMoneyOnDeathCommand command) => _model.MoneyOnDeath.Value = command.MoneyOnDeath;
 }

@@ -5,7 +5,7 @@ public class TurretInstaller : MonoBehaviour, IDamageable
     private IContext _context;
 
     // -------------------- META --------------------
-    private TurretHealthModel _healthModel;
+    [SerializeField] private TurretHealthModel _healthModel;
     [SerializeField] private TurretHealthView _healthView;
     private TurretHealthController _healthController;
 
@@ -19,7 +19,7 @@ public class TurretInstaller : MonoBehaviour, IDamageable
         _context = new BaseContext();
         // -------------------- META --------------------
         // Initialise Health MVC
-        _healthModel = new TurretHealthModel();
+        //_healthModel = new TurretHealthModel();
         _healthModel.Initialise(_context);
         _context.ModelLocator.Register(_healthModel);
 

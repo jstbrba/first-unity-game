@@ -1,6 +1,9 @@
 ﻿using Utilities;
+using UnityEngine;
+[CreateAssetMenu(fileName = "ShutterHealth", menuName = "Models/Shutter/ShutterHealth")]
 public class ShutterHealthModel : BaseModel
 {
+    [SerializeField] private int _baseMaxHealth = 10;
     public Observable<int> MaxHealth { get { return _maxHealth; } }
     public Observable<int> CurrentHealth { get { return _currentHealth; } }
 
@@ -10,7 +13,7 @@ public class ShutterHealthModel : BaseModel
     {
         base.Initialise(context);
 
-        _maxHealth.Value = 30; // Fix later
+        _maxHealth.Value = _baseMaxHealth;
         _currentHealth.Value = _maxHealth.Value;
     }
 }

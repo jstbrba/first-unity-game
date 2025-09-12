@@ -4,24 +4,27 @@ public class ShutterInstaller : MonoBehaviour, IDamageable
 {
     private IContext _context;
 
-    private ShutterHealthModel _healthModel;
-    [SerializeField] private ShutterHealthView _healthView;
-    private ShutterHealthController _healthController;
+    private HealthModel _healthModel;
+    [SerializeField] private HealthView _healthView;
+    private HealthController _healthController;
 
-
+    private Shutter _shutter;
     private void Start()
     {
         _context = new BaseContext();
 
-        _healthModel = new ShutterHealthModel();
+        _healthModel = new HealthModel();
         _healthModel.Initialise(_context);
         _context.ModelLocator.Register(_healthModel);
 
         _healthView.Initialise(_context);
         _context.ViewLocator.Register(_healthView);
 
-        _healthController = new ShutterHealthController(_healthModel, _healthView);
+        _healthController = new HealthController(_healthModel, _healthView);
         _healthController.Initialise(_context);
+
+        _shutter = GetComponent<Shutter>();
+        _shutter.Intitialise(_context);
     }
     public void ApplyDamage(int damage)
     {

@@ -2,25 +2,29 @@ using UnityEngine;
 
 public class Shutter : MonoBehaviour
 {
+    private IContext _context;
+
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float shutterSpeed;
     [SerializeField] private Generator gen;
     private Vector3 originalPosition;
     [SerializeField] private BoxCollider2D boxCollider;
 
-    //private Health health;
 
     private bool isOn = true;
     private bool isGenOn = true;
 
-    private void Awake()
-    {
-        //health = GetComponent<ShutterMVC>().ShutterHealth;
-    }
     private void Start()
     {
         originalPosition = transform.position;
     }
+    public void Intitialise(IContext context)
+    {
+        _context = context;
+
+        _context.CommandBus.AddListener<DeathCommand>(HandleDeath);
+    }
+
     private void OnEnable()
     {
         gen.OnPowerDown += Shutter_OnPowerDown;
@@ -51,7 +55,7 @@ public class Shutter : MonoBehaviour
         isOn = !isOn;
     }
     private void Shutter_OnPowerDown() => isGenOn = false;
-    public void HandleDeath()
+    public void HandleDeath(DeathCommand command)
     {
         gameObject.SetActive(false);
     }

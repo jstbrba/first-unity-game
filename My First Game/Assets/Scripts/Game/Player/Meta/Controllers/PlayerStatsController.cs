@@ -10,6 +10,8 @@ public class PlayerStatsController : BaseController<PlayerStatsModel, PlayerStat
         _model.Speed.onValueChanged += Model_Speed_OnValueChanged;
         _model.Attack.onValueChanged += Model_Attack_OnValueChanged;
         _model.JumpPower.onValueChanged += Model_JumpPower_OnValueChanged;
+
+        Context.CommandBus.AddListener<UpgradeSpeedCommand>(UpgradeSpeed);
     }
     public void Model_Speed_OnValueChanged(float previous, float current)
     {
@@ -23,4 +25,5 @@ public class PlayerStatsController : BaseController<PlayerStatsModel, PlayerStat
     {
         Context.CommandBus.Dispatch(new JumpPowerChangedCommand(previous, current));
     }
+    public void UpgradeSpeed(UpgradeSpeedCommand command) => _model.Speed.Value += command.Speed;
 }

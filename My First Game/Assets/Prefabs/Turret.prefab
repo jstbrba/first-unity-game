@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 440932895215709090}
   - component: {fileID: 1258806608081408248}
   - component: {fileID: -6570103769672519272}
-  - component: {fileID: 1639170915998796400}
+  - component: {fileID: 1972034502827991935}
   - component: {fileID: -1467658047252152962}
   m_Layer: 0
   m_Name: Turret
@@ -275,9 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84bafd6063afda4a9d9bf29fd9d8af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthModel: {fileID: 11400000, guid: db37ddcc92ed3fb4c8affa2af8dca2b8, type: 2}
-  _healthView: {fileID: 1639170915998796400}
---- !u!114 &1639170915998796400
+  _healthView: {fileID: 1972034502827991935}
+--- !u!114 &1972034502827991935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,7 +285,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6691915702809422149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be1374b0a5268884f868ee3e02bfa91a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d7b86af6f9e7804f8c8ebf85fab01ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-1467658047252152962

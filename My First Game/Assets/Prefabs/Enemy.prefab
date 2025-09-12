@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6916444028683405547}
   - component: {fileID: 741623651530418359}
   - component: {fileID: -2332386001688319368}
-  - component: {fileID: 8107054904261384894}
+  - component: {fileID: -2248001782475567049}
   - component: {fileID: -8270882639602251634}
   - component: {fileID: 2497022388317113174}
   - component: {fileID: 2652462622210528934}
@@ -204,11 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ae77952ec5cab42ba13f75e63ec027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseHealthModel: {fileID: 11400000, guid: a81e1e0b05b5e8a4fbdad6b40f3ea408, type: 2}
-  _healthView: {fileID: 8107054904261384894}
-  _baseStatsModel: {fileID: 11400000, guid: 0bb317cae52177c4e9c60d208349c573, type: 2}
+  _healthView: {fileID: -2248001782475567049}
   _statsView: {fileID: -8270882639602251634}
---- !u!114 &8107054904261384894
+--- !u!114 &-2248001782475567049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,10 +215,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3120645457077790973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07102cd86f6238f4db82492ecd589a0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d7b86af6f9e7804f8c8ebf85fab01ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTransform: {fileID: 0}
 --- !u!114 &-8270882639602251634
 MonoBehaviour:
   m_ObjectHideFlags: 0

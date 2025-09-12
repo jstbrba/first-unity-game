@@ -7,9 +7,9 @@ public class PlayerInstaller : MonoBehaviour, IDamageable
     private IContext _context;
     // -------------------- META --------------------
     // Health MVC
-    private PlayerHealthModel _healthModel;
+    private HealthModel _healthModel;
     [SerializeField] private PlayerHealthView _healthView;
-    private PlayerHealthController _healthController;
+    private HealthController _healthController;
 
     // Stats MVC
     private PlayerStatsModel _statsModel;
@@ -24,14 +24,14 @@ public class PlayerInstaller : MonoBehaviour, IDamageable
         _context = new BaseContext();
         // -------------------- META --------------------
         // Initialise Health MVC
-         _healthModel = new PlayerHealthModel();
+         _healthModel = new HealthModel();
         _healthModel.Initialise(_context);
         _context.ModelLocator.Register(_healthModel);
 
         _healthView.Initialise(_context);
         _context.ViewLocator.Register(_healthView);
 
-        _healthController = new PlayerHealthController(_healthModel, _healthView);
+        _healthController = new HealthController(_healthModel, _healthView);
         _healthController.Initialise(_context);
 
         // Initialise Stats MVC

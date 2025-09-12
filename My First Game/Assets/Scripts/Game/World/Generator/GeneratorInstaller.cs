@@ -4,9 +4,9 @@ public class GeneratorInstaller : MonoBehaviour, IDamageable
 {
     private IContext _context;
 
-    private GeneratorHealthModel _healthModel;
-    [SerializeField] private GeneratorHealthView _healthView;
-    private GeneratorHealthController _healthController;
+    private HealthModel _healthModel;
+    [SerializeField] private HealthView _healthView;
+    private HealthController _healthController;
 
     private GeneratorStatsModel _statsModel;
     [SerializeField] private GeneratorStatsView _statsView;
@@ -17,14 +17,14 @@ public class GeneratorInstaller : MonoBehaviour, IDamageable
     {
         _context = new BaseContext();
 
-        _healthModel = new GeneratorHealthModel();
+        _healthModel = new HealthModel();
         _healthModel.Initialise(_context);
         _context.ModelLocator.Register(_healthModel);
 
         _healthView.Initialise(_context);
         _context.ViewLocator.Register(_healthView);
 
-        _healthController = new GeneratorHealthController(_healthModel, _healthView);
+        _healthController = new HealthController(_healthModel, _healthView);
         _healthController.Initialise(_context);
 
         _statsModel = new GeneratorStatsModel();

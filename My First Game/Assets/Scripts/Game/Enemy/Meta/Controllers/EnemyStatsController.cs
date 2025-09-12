@@ -8,23 +8,7 @@ public class EnemyStatsController : BaseController<EnemyStatsModel, EnemyStatsVi
     {
         base.Initialise(context);
 
-        _model.Speed.onValueChanged += Model_Speed_OnValueChanged;
-        _model.Attack.onValueChanged += Model_Attack_OnValueChanged;
-        _model.MoneyOnDeath.onValueChanged += Model_MoneyOnDeath_OnValueChanged;
-
         Context.CommandBus.AddListener<DeathCommand>(Health_OnDeath);
-    }
-    public void Model_Speed_OnValueChanged(float previous, float current) 
-    {
-        Context.CommandBus.Dispatch(new SpeedChangedCommand(previous, current));
-    }
-    public void Model_Attack_OnValueChanged(int previous, int current) 
-    {
-        Context.CommandBus.Dispatch(new AttackChangedCommand(previous, current));
-    }
-    public void Model_MoneyOnDeath_OnValueChanged(int previous, int current) 
-    {
-        Context.CommandBus.Dispatch(new DeathMoneyChangedCommand(previous, current));
     }
     public void Health_OnDeath(DeathCommand command)
     {

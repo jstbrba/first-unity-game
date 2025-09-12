@@ -5,6 +5,7 @@ namespace Game
     {
         private IContext _context;
         private EnemyStatsModel _statsModel;
+        private HealthModel _healthModel;
         [HideInInspector] new EnemySettings settings => (EnemySettings)base.settings;
         private float _movementSpeed;
         private int _moneyOnDeath;
@@ -38,7 +39,8 @@ namespace Game
         {
             _context = context;
 
-            _context.CommandBus.AddListener<HealthChangedCommand>(HealthCheck);
+            _healthModel = _context.ModelLocator.Get<HealthModel>();
+            _healthModel.CurrentHealth.onValueChanged += HealthCheck;
             _context.CommandBus.AddListener<DeathCommand>(HandleDeath);
 
             _statsModel = _context.ModelLocator.Get<EnemyStatsModel>();
@@ -56,8 +58,7 @@ namespace Game
         }
         private void OnDisable()
         {
-            _context?.CommandBus.RemoveListener<HealthChangedCommand>(HealthCheck);
-            _context?.CommandBus.RemoveListener<DeathCommand>(HandleDeath);
+            _context?.CommandBus.RemoveListener<DeathCommand>(HandleDeath);       
         }
         private void Update()
         {
@@ -107,9 +108,9 @@ namespace Game
             settings.moneyChannel.Invoke(settings.moneyOnDeath);
             FlyweightFactory.ReturnToPool(this);
         }
-        public void HealthCheck(HealthChangedCommand command)
+        public void HealthCheck(int previous, int current)
         {
-            _isLowHealth = command.Current < _lowHealthThreshold ? true : false;
+            _isLowHealth = current < _lowHealthThreshold ? true : false;
         }
         public void Model_Speed_OnValueChanged(float previous, float current) => _movementSpeed = current;
         public void Model_MoneyOnDeath_OnValueChanged(int previous, int current) => _moneyOnDeath = current;

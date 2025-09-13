@@ -9,7 +9,7 @@ public class MoneyInstaller : MonoBehaviour {
 
     private void Awake()
     {
-        _context = new BaseContext();
+        _context = new EconomyContext();
 
         _model = new MoneyModel();
         _model.Initialise();

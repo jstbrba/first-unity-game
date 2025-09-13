@@ -10,6 +10,10 @@ public class PlayerStatsController : BaseController<PlayerStatsModel, PlayerStat
         Context.CommandBus.AddListener<UpgradeSpeedCommand>(UpgradeSpeed);
         Context.CommandBus.AddListener<UpgradeAttackCommand>(UpgradeAttack);
     }
-    public void UpgradeSpeed(UpgradeSpeedCommand command) => _model.Speed.Value += command.Speed;
+    public void UpgradeSpeed(UpgradeSpeedCommand command)
+    {
+        _model.Speed.Value += command.Speed;
+    }
+
     public void UpgradeAttack(UpgradeAttackCommand command) => _model.Attack.Value += command.Attack;
 }

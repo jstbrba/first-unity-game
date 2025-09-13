@@ -10,6 +10,7 @@ public class UpgradeMenuController : BaseController<UpgradeMenuModel, UpgradeMen
         base.Initialise(context);
 
         Context.CommandBus.AddListener<ToggleMenuCommand>(OnToggleMenu);
+        Context.CommandBus.AddListener<PurchaseResponse>(OnPurchaseResponse);
 
         _view.OnSpeedUpgrade += View_OnSpeedUpgrade;
         _view.OnAttackUpgrade += View_OnAttackUpgrade;
@@ -20,9 +21,10 @@ public class UpgradeMenuController : BaseController<UpgradeMenuModel, UpgradeMen
 
     public void View_OnSpeedUpgrade() 
     {
-        // Send request to money MVC and wait for response
-        // Send upgrade command to other context
-        _model.SpeedUpgradePrice.Value = Mathf.Min((int)(_model.SpeedUpgradePrice.Value * 1.5f),99999);
+        foreach (var moneyContext in ContextLocator.Get<EconomyContext>()) 
+        {
+            moneyContext.CommandBus.Dispatch(new PurchaseRequest(PurchaseType.SpeedUpgrade,_model.SpeedUpgradePrice.Value, Context));
+        }
     }
     public void View_OnAttackUpgrade() 
     {
@@ -41,5 +43,26 @@ public class UpgradeMenuController : BaseController<UpgradeMenuModel, UpgradeMen
         // Send request to money MVC and wait for response
         // Send upgrade command to other context
         _model.GenUpgradePrice.Value = Mathf.Min((int)(_model.GenUpgradePrice.Value * 1.5f), 99999);
+    }
+    public void OnPurchaseResponse(PurchaseResponse response)
+    {
+        if (!response.Success)
+        {
+            return;
+        }
+
+        PurchaseType type = response.PurchaseType;
+        switch (type)
+        {
+            case PurchaseType.SpeedUpgrade:
+                DispatchToPlayer(new UpgradeSpeedCommand(1));
+                _model.SpeedUpgradePrice.Value = Mathf.Min((int)(_model.SpeedUpgradePrice.Value * 1.5f), 99999);
+                return;
+        }
+    }
+    public void DispatchToPlayer(ICommand command)
+    {
+        foreach (var ctx in ContextLocator.Get<PlayerContext>())
+            ctx.CommandBus.Dispatch(command);
     }
 }

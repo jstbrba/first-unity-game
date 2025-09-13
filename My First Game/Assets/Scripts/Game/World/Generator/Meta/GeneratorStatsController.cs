@@ -12,6 +12,7 @@ public class GeneratorStatsController : BaseController<GeneratorStatsModel, Gene
         _model.CurrentPower.onValueChanged += Model_CurrentPower_OnValueChanged;
 
         Context.CommandBus.AddListener<ApplyChargeCommand>(ApplyCharge);
+        Context.CommandBus.AddListener<UpgradeMaxPowerCommand>(UpgradeMaxPower);
     }
     private void Model_CurrentPower_OnValueChanged(int previous, int current)
     {
@@ -22,4 +23,5 @@ public class GeneratorStatsController : BaseController<GeneratorStatsModel, Gene
     {
         _model.CurrentPower.Value = Mathf.Clamp(_model.CurrentPower.Value + command.Charge, 0, _model.MaxPower.Value);
     }
+    private void UpgradeMaxPower(UpgradeMaxPowerCommand command) => _model.MaxPower.Value += command.Power;
 }

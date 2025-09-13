@@ -105,7 +105,7 @@ namespace Game
         private void Any(IState to, IPredicate condition) => _stateMachine.AddAnyTransition(to, condition);
         public void HandleDeath(DeathCommand command)
         {
-            settings.moneyChannel.Invoke(settings.moneyOnDeath);
+            settings.moneyChannel.Invoke(_moneyOnDeath);
             FlyweightFactory.ReturnToPool(this);
         }
         public void HealthCheck(int previous, int current)

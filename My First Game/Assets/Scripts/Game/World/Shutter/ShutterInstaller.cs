@@ -11,7 +11,7 @@ public class ShutterInstaller : MonoBehaviour, IDamageable
     private Shutter _shutter;
     private void Start()
     {
-        _context = new BaseContext();
+        _context = new ShutterContext();
 
         _healthModel = new HealthModel();
         _healthModel.Initialise(_context);

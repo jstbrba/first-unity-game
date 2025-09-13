@@ -4,17 +4,21 @@ public class MoneyView : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI _moneyText;
     private IContext _context;
-    private int _startingValue;
+    private MoneyModel _model;
+    private int _money;
 
-    public void Initialise(IContext context, int startingValue)
+    public void Initialise(IContext context)
     {
         _context = context;
-        _startingValue = startingValue;
 
-        _context.CommandBus.AddListener<MoneyChangedCommand>(OnMoneyChanged);
+        _model = _context.ModelLocator.Get<MoneyModel>();
+        _money = _model.Money.Value;
+
+        _model.Money.onValueChanged += Model_Money_OnValueChanged;
     }
-    public void OnMoneyChanged(MoneyChangedCommand command)
+    public void Model_Money_OnValueChanged(int previous, int current)
     {
-        _moneyText.text = "$$$: " + command.Current;
+        _money = current;
+        _moneyText.text = "$$$: " + current;
     }
 }

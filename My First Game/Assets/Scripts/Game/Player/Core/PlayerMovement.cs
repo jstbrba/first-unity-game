@@ -41,7 +41,14 @@ public class PlayerMovement : MonoBehaviour
         _horizontalInput = Input.GetAxis("Horizontal");
         _jumpPressed = _inputReader.jumpPressed;
 
-        if (Input.GetKeyDown(KeyCode.G)) _context.CommandBus.Dispatch(new UpgradeSpeedCommand(1));
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            foreach (var enemyContext in ContextLocator.Get<EnemyContext>())
+            {
+                Debug.Log("Sending upgrade speed to enemy contexts");
+                enemyContext.CommandBus.Dispatch(new UpgradeSpeedCommand(10));
+            }
+        }
     }
     public void FlipPlayer()
     {

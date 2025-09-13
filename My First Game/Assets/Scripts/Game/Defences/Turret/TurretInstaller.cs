@@ -16,7 +16,7 @@ public class TurretInstaller : MonoBehaviour, IDamageable
     private void Start()
     {
 
-        _context = new BaseContext();
+        _context = new TurretContext();
         // -------------------- META --------------------
         // Initialise Health MVC
         _healthModel = new HealthModel();

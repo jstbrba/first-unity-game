@@ -21,7 +21,7 @@ public class PlayerInstaller : MonoBehaviour, IDamageable
     private PlayerStateMachine _stateMachine;
     private void Start()
     {
-        _context = new BaseContext();
+        _context = new PlayerContext();
         // -------------------- META --------------------
         // Initialise Health MVC
          _healthModel = new HealthModel();

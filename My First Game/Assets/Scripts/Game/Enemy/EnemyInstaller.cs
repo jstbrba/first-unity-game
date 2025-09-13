@@ -19,7 +19,7 @@ public class EnemyInstaller : MonoBehaviour, IDamageable
     private Enemy _enemy;
     private void Start()
     {
-        _context = new BaseContext();
+        _context = new EnemyContext();
 
         // Initialise Health MVC
         _healthModel = new HealthModel();

@@ -15,7 +15,7 @@ public class GeneratorInstaller : MonoBehaviour, IDamageable
     private Generator _generator;
     private void Start()
     {
-        _context = new BaseContext();
+        _context = new GeneratorContext();
 
         _healthModel = new HealthModel();
         _healthModel.Initialise(_context);

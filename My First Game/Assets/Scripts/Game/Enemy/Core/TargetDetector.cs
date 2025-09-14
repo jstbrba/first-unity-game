@@ -14,10 +14,7 @@ namespace Game
             if (hit.collider != null)
             {
                 if (hit.collider.CompareTag("EnemyTarget"))
-                {
-                    Debug.Log("Target IN RANGE!!");
                     return true;
-                }
             }
             return false;
         }

@@ -12,7 +12,8 @@ public class DayState : BaseTimeState
     }
     public override void Update()
     {
-        background.color = Color.Lerp(background.color, targetColour, lerpSpeed * Time.deltaTime);
+        //background.color = Color.Lerp(background.color, targetColour, lerpSpeed * Time.deltaTime);
+        background.color = targetColour;
 
         elapsed += Time.deltaTime;
     }

@@ -27,6 +27,10 @@ namespace Game
             current = nodes[state.GetType()];
             current.State?.OnEnter();
         }
+        public IState GetCurrentState()
+        {
+            return current.State;
+        }
 
         private void ChangeState(IState state)
         {

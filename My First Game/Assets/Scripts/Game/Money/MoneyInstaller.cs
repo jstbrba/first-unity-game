@@ -25,4 +25,8 @@ public class MoneyInstaller : MonoBehaviour {
     {
         _controller.AddMoney(amount);
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M)) Controller_AddMoney(100);
+    }
 }

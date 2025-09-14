@@ -34,15 +34,17 @@ public class UpgradeMenuController : BaseController<UpgradeMenuModel, UpgradeMen
     }
     public void View_OnDoorUpgrade() 
     {
-        // Send request to money MVC and wait for response
-        // Send upgrade command to other context
-        _model.DoorUpgradePrice.Value = Mathf.Min((int)(_model.DoorUpgradePrice.Value * 1.5f), 99999);
+        foreach (var moneyContext in ContextLocator.Get<EconomyContext>())
+        {
+            moneyContext.CommandBus.Dispatch(new PurchaseRequest(PurchaseType.DoorUpgrade, _model.DoorUpgradePrice.Value, Context));
+        }
     }
     public void View_OnGenUpgrade() 
     {
-        // Send request to money MVC and wait for response
-        // Send upgrade command to other context
-        _model.GenUpgradePrice.Value = Mathf.Min((int)(_model.GenUpgradePrice.Value * 1.5f), 99999);
+        foreach (var moneyContext in ContextLocator.Get<EconomyContext>())
+        {
+            moneyContext.CommandBus.Dispatch(new PurchaseRequest(PurchaseType.GenUpgrade, _model.GenUpgradePrice.Value, Context));
+        }
     }
     public void OnPurchaseResponse(PurchaseResponse response)
     {
@@ -58,11 +60,31 @@ public class UpgradeMenuController : BaseController<UpgradeMenuModel, UpgradeMen
                 DispatchToPlayer(new UpgradeSpeedCommand(1));
                 _model.SpeedUpgradePrice.Value = Mathf.Min((int)(_model.SpeedUpgradePrice.Value * 1.5f), 99999);
                 return;
+            case PurchaseType.AttackUpgrade:
+                return;
+            case PurchaseType.DoorUpgrade:
+                DispatchToShutter(new UpgradeMaxHealthCommand(5));
+                _model.DoorUpgradePrice.Value = Mathf.Min((int)(_model.DoorUpgradePrice.Value * 1.5f), 99999);
+                return;
+            case PurchaseType.GenUpgrade:
+                DispatchToGenerator(new UpgradeMaxHealthCommand(5));
+                _model.GenUpgradePrice.Value = Mathf.Min((int)(_model.GenUpgradePrice.Value * 1.5f), 99999);
+                return;
         }
     }
     public void DispatchToPlayer(ICommand command)
     {
         foreach (var ctx in ContextLocator.Get<PlayerContext>())
+            ctx.CommandBus.Dispatch(command);
+    }
+    public void DispatchToShutter(ICommand command)
+    {
+        foreach (var ctx in ContextLocator.Get<ShutterContext>())
+            ctx.CommandBus.Dispatch(command);
+    }
+    public void DispatchToGenerator(ICommand command)
+    {
+        foreach (var ctx in ContextLocator.Get<GeneratorContext>())
             ctx.CommandBus.Dispatch(command);
     }
 }

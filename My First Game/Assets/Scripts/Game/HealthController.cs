@@ -18,7 +18,13 @@ public class HealthController : BaseController<HealthModel, HealthView>
     {
         _model.CurrentHealth.Value = Mathf.Max(0, _model.CurrentHealth.Value - command.Damage);
     }
-    public void UpgradeMaxHealth(UpgradeMaxHealthCommand command) => _model.MaxHealth.Value += command.Health;
+    public void UpgradeMaxHealth(UpgradeMaxHealthCommand command)
+    {
+        _model.MaxHealth.Value += command.Health;
+        _model.CurrentHealth.Value = _model.MaxHealth.Value;
+        Debug.Log("Health upgraded to " + _model.MaxHealth.Value);
+    }
+
     public void Model_CurrentHealth_OnValueChanged(int previous, int current)
     {
         if (_model.CurrentHealth.Value == 0)

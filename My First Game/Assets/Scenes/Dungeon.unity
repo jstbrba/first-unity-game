@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 768432706}
-  dayNightCycle: {fileID: 949203544}
+  dayNightCycle: {fileID: 949203546}
 --- !u!1 &142031699
 GameObject:
   m_ObjectHideFlags: 0
@@ -6484,7 +6484,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 949203545}
-  - component: {fileID: 949203544}
+  - component: {fileID: 949203546}
+  - component: {fileID: 949203548}
+  - component: {fileID: 949203547}
   m_Layer: 0
   m_Name: TimeCycle
   m_TagString: Untagged
@@ -6492,22 +6494,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &949203544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949203543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9a12756899320c4b88cde79e2bc7fb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  background: {fileID: 954448289}
-  dayDuration: 100
-  nightDuration: 50
-  _bed: {fileID: 584332695}
 --- !u!4 &949203545
 Transform:
   m_ObjectHideFlags: 0
@@ -6523,6 +6509,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &949203546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949203543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7485524cc5216bc49874667bbaa531e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 954448289}
+  dayDuration: 80
+  nightDuration: 50
+  _bed: {fileID: 584332695}
+  _enemySpawner: {fileID: 32701478}
+--- !u!114 &949203547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949203543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fee74d6627c754479cb298f70892755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dayNightText: {fileID: 0}
+  _dayCounterText: {fileID: 0}
+--- !u!114 &949203548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949203543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5489978e03473464faf358e934f50113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 949203547}
 --- !u!1 &954448287
 GameObject:
   m_ObjectHideFlags: 0

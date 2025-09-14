@@ -3,6 +3,8 @@ using System;
 using UnityEngine;
 public class DayNightCycle : MonoBehaviour
 {
+    private IContext _context;
+
     [SerializeField] private SpriteRenderer background;
     [SerializeField] private float dayDuration;
     [SerializeField] private float nightDuration;
@@ -24,6 +26,10 @@ public class DayNightCycle : MonoBehaviour
         // At(nightState, dayState, new FuncPredicate(()=> nightState.IsFinished()));
 
         stateMachine.SetState(dayState);
+    }
+    public void Initialise(IContext context)
+    {
+        _context = context;
     }
 
     private void OnEnable()

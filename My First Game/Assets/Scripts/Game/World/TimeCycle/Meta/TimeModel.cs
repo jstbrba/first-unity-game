@@ -11,5 +11,6 @@ public class TimeModel : BaseModel
     {
         base.Initialise(context);
         _day.Value = 1;
+        _isDayTIme.Value = true;
     }
 }

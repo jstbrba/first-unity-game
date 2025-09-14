@@ -7,6 +7,7 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private float dayDuration;
     [SerializeField] private float nightDuration;
     [SerializeField] private Bed _bed;
+    [SerializeField] private EnemySpawner _enemySpawner;
 
     private StateMachine stateMachine;
     private DayState dayState;
@@ -17,7 +18,7 @@ public class DayNightCycle : MonoBehaviour
         stateMachine = new StateMachine();
 
         dayState = new DayState(this, background, dayDuration);
-        nightState = new NightState(this, background, nightDuration);
+        nightState = new NightState(this, background, nightDuration, _enemySpawner);
 
         At(dayState, nightState, new FuncPredicate(() => dayState.IsFinished()));
         // At(nightState, dayState, new FuncPredicate(()=> nightState.IsFinished()));

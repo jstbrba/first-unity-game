@@ -1,15 +1,22 @@
-﻿using System;
+﻿using Game;
+using System;
 using UnityEngine;
 
 public class NightState : BaseTimeState
 {
-    public NightState(DayNightCycle dayCycle, SpriteRenderer background, float duration) : base(dayCycle, background, duration) { }
+    private EnemySpawner _enemySpawner;
+    public NightState(DayNightCycle dayCycle, SpriteRenderer background, float duration, EnemySpawner enemySpawner) : base(dayCycle, background, duration) 
+    {
+        _enemySpawner = enemySpawner;
+    }
 
     public override void OnEnter()
     {
         dayCycle.OnEnterNightState();
         elapsed = 0f;
         targetColour = nightColour;
+
+        _enemySpawner.DespawnEnemiesOutOfView();
     }
     public override void Update()
     {

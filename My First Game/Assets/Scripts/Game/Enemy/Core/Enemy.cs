@@ -63,6 +63,8 @@ namespace Game
         private void Update()
         {
             _stateMachine.Update();
+
+            if (Input.GetKeyDown(KeyCode.N)) _context.CommandBus.Dispatch(new UpgradeAttackCommand(2));
         }
         private void FixedUpdate()
         {

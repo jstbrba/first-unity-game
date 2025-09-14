@@ -17,6 +17,7 @@ public class EnemyInstaller : MonoBehaviour, IDamageable
 
     // -------------------- CORE --------------------
     private Enemy _enemy;
+    private EnemyAttack _enemyAttack;
     private void Start()
     {
         _context = new EnemyContext();
@@ -46,6 +47,9 @@ public class EnemyInstaller : MonoBehaviour, IDamageable
         // -------------------- CORE --------------------
         _enemy = GetComponent<Enemy>();
         _enemy.Initialise(_context);
+
+        _enemyAttack = GetComponent<EnemyAttack>();
+        _enemyAttack.Initialise(_context);
     }
 
     public void ApplyDamage(int damage)

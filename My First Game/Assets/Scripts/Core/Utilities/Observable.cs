@@ -5,6 +5,7 @@ namespace Utilities
     {
         private T _value;
         public event Action<T, T> onValueChanged;
+        public event Action onChanged;
 
         public T Value
         {
@@ -16,6 +17,7 @@ namespace Utilities
                     var old = _value;
                     _value = value;
                     onValueChanged?.Invoke(old, value);
+                    onChanged?.Invoke();
                 }
             }
         }

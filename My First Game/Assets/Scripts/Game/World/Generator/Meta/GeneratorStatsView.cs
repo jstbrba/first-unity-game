@@ -8,8 +8,6 @@ public class GeneratorStatsView : MonoBehaviour, IView
     private GeneratorStatsModel _model;
 
     [SerializeField] private Image _powerBar;
-    private int _currentPower;
-    private int _maxPower;
 
     public void Initialise(IContext context)
     {
@@ -17,7 +15,7 @@ public class GeneratorStatsView : MonoBehaviour, IView
 
         _model = _context.ModelLocator.Get<GeneratorStatsModel>();
 
-        InitialiseValues();
+        UpdateFillAmount();
 
         _model.CurrentPower.onValueChanged += Model_CurrentPower_OnValueChanged;
         _model.MaxPower.onValueChanged -= Model_MaxPower_OnValueChanged;
@@ -25,17 +23,15 @@ public class GeneratorStatsView : MonoBehaviour, IView
 
     private void Model_CurrentPower_OnValueChanged(int previous, int current)
     {
-        _currentPower = current;
-        _powerBar.fillAmount = (float) _currentPower / _maxPower;
+        UpdateFillAmount();
     }
     private void Model_MaxPower_OnValueChanged(int previous, int current)
     {
-        _maxPower = current;
+        UpdateFillAmount();
     }
-    private void InitialiseValues()
+    private void UpdateFillAmount()
     {
-        _currentPower = _model.CurrentPower.Value;
-        _maxPower = _model.MaxPower.Value;
-        _powerBar.fillAmount = (float) _currentPower / _maxPower;
+        _powerBar.fillAmount = (float)_model.CurrentPower.Value / _model.MaxPower.Value;
     }
+    private void HandleDeath() => gameObject.SetActive(false);
 }

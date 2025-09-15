@@ -20,7 +20,6 @@ public class Generator : MonoBehaviour
 
         _statsModel.MaxPower.onValueChanged += Model_MaxPower_OnValueChanged;
         _statsModel.CurrentPower.onValueChanged -= Model_CurrentPower_OnValueChanged;
-        Debug.Log("Gen Max power: " + _maxPower);
 
         _context.CommandBus.AddListener<DeathCommand>(HandleDeath);
         _context.CommandBus.AddListener<PowerDownCommand>(HandlePowerDown);

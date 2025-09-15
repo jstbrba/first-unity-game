@@ -3,6 +3,9 @@ using UnityEngine;
 namespace Game
 {
     public class EnemySpawner : MonoBehaviour {
+        private IContext _context;
+        private EnemySpawnerModel _model;
+
         [Header("Enemy Data")]
         [SerializeField] private List<EnemySettings> enemySettings;
 
@@ -14,6 +17,14 @@ namespace Game
 
         private float spawnTimer;
         private int enemyCount;
+        private bool _limitReached;
+        public void Initialise(IContext context)
+        {
+            _context = context;
+
+            _model = _context.ModelLocator.Get<EnemySpawnerModel>();
+            _model.SpawnCount.onValueChanged += Model_SpawnCount_OnValueChanged;
+        }
 
         private void Update()
         {
@@ -21,7 +32,7 @@ namespace Game
 
             if (Input.GetKeyDown(KeyCode.T)) DespawnEnemiesOutOfView(); 
 
-            if (spawnTimer > spawnInterval)
+            if (spawnTimer > spawnInterval && !_limitReached)
             {
                 SpawnEnemy();
                 spawnTimer = 0;
@@ -44,6 +55,10 @@ namespace Game
                 }
             }
                     
+        }
+        public void Model_SpawnCount_OnValueChanged(int previous, int current)
+        {
+            _limitReached = current >= _model.SpawnLimit.Value ? true : false;
         }
     }
 }

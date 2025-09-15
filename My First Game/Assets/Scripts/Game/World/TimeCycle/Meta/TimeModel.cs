@@ -19,7 +19,7 @@ public class TimeModel : BaseModel
         _day.Value = 1;
         _isDayTIme.Value = true;
         _canSleep.Value = false;
-        _dayDuration = 10;
-        _nightDuration = 10;
+        _dayDuration = 80;
+        _nightDuration = 50;
     }
 }

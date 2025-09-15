@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthView: {fileID: -2248001782475567049}
   _statsView: {fileID: -8270882639602251634}
-  _enemyStatsConfig: {fileID: 11400000, guid: 6bb7d30d191c4c040942983f504c20f0, type: 2}
+  _statsConfig: {fileID: 11400000, guid: 6bb7d30d191c4c040942983f504c20f0, type: 2}
 --- !u!114 &-2248001782475567049
 MonoBehaviour:
   m_ObjectHideFlags: 0

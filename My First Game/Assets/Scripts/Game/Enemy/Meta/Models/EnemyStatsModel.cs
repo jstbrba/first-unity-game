@@ -1,7 +1,7 @@
 ﻿using Utilities;
 public class EnemyStatsModel : BaseModel
 {
-    private EnemyStatsConfig _enemyStatsConfig;
+    private EnemyStatsConfig _config;
     public Observable<float> Speed { get { return _speed; } }
     public Observable<int> Attack {  get { return _attack; } }
     public Observable<int> MoneyOnDeath {  get { return _moneyOnDeath; } }
@@ -10,16 +10,16 @@ public class EnemyStatsModel : BaseModel
     private Observable<int> _attack = new Observable<int>();
     private Observable<int> _moneyOnDeath = new Observable<int>();
 
-    public EnemyStatsModel(EnemyStatsConfig enemyStatsConfig)
+    public EnemyStatsModel(EnemyStatsConfig config)
     {
-        _enemyStatsConfig = enemyStatsConfig;
+        _config = config;
     }
     public override void Initialise(IContext context)
     {
         base.Initialise(context);
 
-        _speed.Value = _enemyStatsConfig.Speed;
-        _attack.Value = _enemyStatsConfig.Attack;
-        _moneyOnDeath.Value = _enemyStatsConfig.MoneyOnDeath;
+        _speed.Value = _config.Speed;
+        _attack.Value = _config.Attack;
+        _moneyOnDeath.Value = _config.MoneyOnDeath;
     }
 }

@@ -7,14 +7,17 @@ public class PlayerInstaller : MonoBehaviour, IDamageable
     private IContext _context;
     // -------------------- META --------------------
     // Health MVC
+    [Header("Health MVC")]
     private HealthModel _healthModel;
     [SerializeField] private PlayerHealthView _healthView;
     private HealthController _healthController;
 
     // Stats MVC
+    [Header("Stats MVC")]
     private PlayerStatsModel _statsModel;
     [SerializeField] private PlayerStatsView _statsView;
     private PlayerStatsController _statsController;
+    [SerializeField] private PlayerStatsConfig _statsConfig;
 
     // -------------------- CORE --------------------
     private PlayerMovement _movement;
@@ -35,7 +38,7 @@ public class PlayerInstaller : MonoBehaviour, IDamageable
         _healthController.Initialise(_context);
 
         // Initialise Stats MVC
-         _statsModel = new PlayerStatsModel();
+         _statsModel = new PlayerStatsModel(_statsConfig);
         _statsModel.Initialise(_context);
         _context.ModelLocator.Register(_statsModel);
 

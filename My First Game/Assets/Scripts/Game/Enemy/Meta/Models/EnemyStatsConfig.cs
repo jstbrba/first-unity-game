@@ -6,3 +6,4 @@ public class EnemyStatsConfig : ScriptableObject
     public int Attack;
     public int MoneyOnDeath;
 }
+

@@ -235,10 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4488c1111c2318544ba1627847316994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthModel: {fileID: 11400000, guid: 196da2762ca2f124ea9efaeb78957642, type: 2}
   _healthView: {fileID: 2666889878779010668}
-  _statsModel: {fileID: 11400000, guid: d1bc1c475fab9964e8cdc49def8f74cd, type: 2}
   _statsView: {fileID: 2770349862119830132}
+  _statsConfig: {fileID: 11400000, guid: 4f4a4fc2379b4444684a9881cf2959f3, type: 2}
 --- !u!114 &2666889878779010668
 MonoBehaviour:
   m_ObjectHideFlags: 0

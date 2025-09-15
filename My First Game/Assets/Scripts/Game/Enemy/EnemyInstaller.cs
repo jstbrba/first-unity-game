@@ -16,7 +16,7 @@ public class EnemyInstaller : MonoBehaviour, IDamageable
     private EnemyStatsModel _statsModel;
     [SerializeField] private EnemyStatsView _statsView;
     private EnemyStatsController _statsController;
-    [SerializeField] EnemyStatsConfig _enemyStatsConfig;
+    [SerializeField] EnemyStatsConfig _statsConfig;
 
     // -------------------- CORE --------------------
     private Enemy _enemy;
@@ -37,7 +37,7 @@ public class EnemyInstaller : MonoBehaviour, IDamageable
         _healthController.Initialise(_context);
 
         // Initialise Stats MVC
-        _statsModel = new EnemyStatsModel(_enemyStatsConfig);
+        _statsModel = new EnemyStatsModel(_statsConfig);
         _statsModel.Initialise(_context);
         _context.ModelLocator.Register(_statsModel);
 

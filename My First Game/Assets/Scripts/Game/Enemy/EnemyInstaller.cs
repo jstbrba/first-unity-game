@@ -6,14 +6,17 @@ public class EnemyInstaller : MonoBehaviour, IDamageable
     private IContext _context;
     // -------------------- META --------------------
     // Enemy Health MVC
+    [Header("Enemy Health MVC")]
     private HealthModel _healthModel;
     [SerializeField] private HealthView _healthView;
     private HealthController _healthController;
 
     // Enemy Stats MVC
+    [Header ("Enemy Stats MVC")]
     private EnemyStatsModel _statsModel;
     [SerializeField] private EnemyStatsView _statsView;
     private EnemyStatsController _statsController;
+    [SerializeField] EnemyStatsConfig _enemyStatsConfig;
 
     // -------------------- CORE --------------------
     private Enemy _enemy;
@@ -34,7 +37,7 @@ public class EnemyInstaller : MonoBehaviour, IDamageable
         _healthController.Initialise(_context);
 
         // Initialise Stats MVC
-        _statsModel = new EnemyStatsModel();
+        _statsModel = new EnemyStatsModel(_enemyStatsConfig);
         _statsModel.Initialise(_context);
         _context.ModelLocator.Register(_statsModel);
 

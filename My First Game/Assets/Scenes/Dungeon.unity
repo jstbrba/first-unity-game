@@ -1911,6 +1911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthView: {fileID: 270236304}
   _statsView: {fileID: 270236303}
+  _statsConfig: {fileID: 11400000, guid: 0975338d2a1b4e04592c13dc073b2129, type: 2}
 --- !u!114 &270236302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,7 +1924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b480d241b5cd7be43b884d5849926351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 100
 --- !u!114 &270236303
 MonoBehaviour:
   m_ObjectHideFlags: 0

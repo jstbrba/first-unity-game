@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DefaultPlayerConfig
   m_EditorClassIdentifier: 
   Speed: 6
-  Attack: 3
+  Attack: 2
   jumpPower: 10

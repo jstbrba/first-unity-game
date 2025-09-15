@@ -3,19 +3,24 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
+    // TODO : Move all this into MVC cos all this really does is just Invoke OnPowerDown()
     private IContext _context;
+    private GeneratorStatsModel _statsModel;
 
-    [SerializeField] private int maxPower;
-    private int currentPower;
+    private int _maxPower;
+    private int _currentPower;
     public event Action OnPowerDown;
-
-    private void Start()
-    {
-        currentPower = maxPower;
-    }
     public void Initialise(IContext context)
     {
         _context = context;
+
+        _statsModel = _context.ModelLocator.Get<GeneratorStatsModel>();
+        _maxPower = _statsModel.MaxPower.Value;
+        _currentPower = _statsModel.CurrentPower.Value;
+
+        _statsModel.MaxPower.onValueChanged += Model_MaxPower_OnValueChanged;
+        _statsModel.CurrentPower.onValueChanged -= Model_CurrentPower_OnValueChanged;
+        Debug.Log("Gen Max power: " + _maxPower);
 
         _context.CommandBus.AddListener<DeathCommand>(HandleDeath);
         _context.CommandBus.AddListener<PowerDownCommand>(HandlePowerDown);
@@ -28,7 +33,6 @@ public class Generator : MonoBehaviour
             _context.CommandBus.Dispatch(new ApplyDamageCommand(2));
         }
     }
-    public void Repair(int value) => currentPower = Mathf.Clamp(currentPower + value, 0, maxPower);
     public void HandleDeath(DeathCommand command)
     {
         OnPowerDown?.Invoke();
@@ -38,4 +42,6 @@ public class Generator : MonoBehaviour
     {
         OnPowerDown.Invoke();
     }
+    private void Model_MaxPower_OnValueChanged(int previous, int current) => _maxPower = current;
+    private void Model_CurrentPower_OnValueChanged(int previous, int current) => _currentPower = current;
 }

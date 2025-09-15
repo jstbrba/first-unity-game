@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class NightState : BaseTimeState
 {
-    private EnemySpawner _enemySpawner;
-    public NightState(DayNightCycle dayCycle, SpriteRenderer background, float duration, EnemySpawner enemySpawner) : base(dayCycle, background, duration) 
-    {
-        _enemySpawner = enemySpawner;
-    }
+    // private EnemySpawner _enemySpawner;
+    public NightState(TimeController controller, float duration) : base(controller, duration) { }
 
     public override void OnEnter()
     {
-        dayCycle.OnEnterNightState();
-        elapsed = 0f;
-        targetColour = nightColour;
-
-        _enemySpawner.DespawnEnemiesOutOfView();
+        _controller.SetTimeNight();
+        // _enemySpawner.DespawnEnemiesOutOfView();
+        elapsed = 0;
     }
     public override void Update()
     {
-        background.color = Color.Lerp(background.color, targetColour, lerpSpeed * Time.deltaTime);
-
         elapsed += Time.deltaTime;
+        if (IsFinished) _controller.SetCanSleep(true);
     }
-    public bool IsFinished() => elapsed >= duration;
+    public bool IsFinished => elapsed > _duration;
 }

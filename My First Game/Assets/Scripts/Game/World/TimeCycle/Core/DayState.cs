@@ -2,20 +2,17 @@
 
 public class DayState : BaseTimeState
 {
-    public DayState(DayNightCycle dayCycle, SpriteRenderer background, float duration) : base(dayCycle, background, duration) { }
+    public DayState(TimeController controller, float duration) : base(controller, duration) { }
 
     public override void OnEnter()
     {
-        dayCycle.OnEnterDayState();
-        elapsed = 0f;
-        targetColour = dayColour;
+        _controller.SetTimeDay();
+        _controller.SetCanSleep(false);
+        elapsed = 0;
     }
     public override void Update()
     {
-        //background.color = Color.Lerp(background.color, targetColour, lerpSpeed * Time.deltaTime);
-        background.color = targetColour;
-
         elapsed += Time.deltaTime;
     }
-    public bool IsFinished() => elapsed >= duration;
+    public bool IsFinished => elapsed > _duration;
 }

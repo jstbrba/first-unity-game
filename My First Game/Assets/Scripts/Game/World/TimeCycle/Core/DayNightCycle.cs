@@ -19,10 +19,10 @@ public class DayNightCycle : MonoBehaviour
     {
         stateMachine = new StateMachine();
 
-        dayState = new DayState(this, background, dayDuration);
-        nightState = new NightState(this, background, nightDuration, _enemySpawner);
+        //dayState = new DayState(this, background, dayDuration);
+        //nightState = new NightState(this, background, nightDuration, _enemySpawner);
 
-        At(dayState, nightState, new FuncPredicate(() => dayState.IsFinished()));
+        //At(dayState, nightState, new FuncPredicate(() => dayState.IsFinished()));
         // At(nightState, dayState, new FuncPredicate(()=> nightState.IsFinished()));
 
         stateMachine.SetState(dayState);
@@ -34,11 +34,11 @@ public class DayNightCycle : MonoBehaviour
 
     private void OnEnable()
     {
-        _bed.onSleep += Bed_OnSleep;
+        //_bed.onSleep += Bed_OnSleep;
     }
     private void OnDisable()
     {
-        _bed.onSleep -= Bed_OnSleep;
+        //_bed.onSleep -= Bed_OnSleep;
     }
     private void Update()
     {
@@ -55,9 +55,9 @@ public class DayNightCycle : MonoBehaviour
 
     public void Bed_OnSleep()
     {
-        if (stateMachine.GetCurrentState() == nightState && nightState.IsFinished())
-            stateMachine.SetState(dayState);
-        else
-            Debug.Log("Night not finished yet or current state is " + stateMachine.GetCurrentState().ToString());
+        //    if (stateMachine.GetCurrentState() == nightState && nightState.IsFinished())
+        //        stateMachine.SetState(dayState);
+        //    else
+        //        Debug.Log("Night not finished yet or current state is " + stateMachine.GetCurrentState().ToString());
     }
 }

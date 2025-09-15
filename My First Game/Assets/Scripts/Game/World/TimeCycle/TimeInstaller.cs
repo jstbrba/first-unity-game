@@ -2,13 +2,13 @@
 
 public class TimeInstaller : MonoBehaviour
 {
+    public IContext Context { get { return _context; } }
+
     private IContext _context;
 
     private TimeModel _model;
     [SerializeField] private TimeView _view;
     private TimeController _controller;
-
-    private DayNightCycle _cycle;
 
     private void Start()
     {
@@ -23,8 +23,13 @@ public class TimeInstaller : MonoBehaviour
 
         _controller = new TimeController(_model, _view);
         _controller.Initialise(_context);
-
-        _cycle = GetComponent<DayNightCycle>();
-        _cycle.Initialise(_context);
+    }
+    private void Update()
+    {
+        _controller.Update();
+    }
+    private void FixedUpdate()
+    {
+        _controller.Update();
     }
 }

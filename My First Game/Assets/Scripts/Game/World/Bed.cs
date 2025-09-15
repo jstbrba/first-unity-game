@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Bed : MonoBehaviour
 {
+    [SerializeField] private TimeInstaller timeInstaller;
     [SerializeField] private Transform _player;
     private InputReader _inputReader;
     private bool _playerInRange;
 
-    public event Action onSleep;
     private void Start()
     {
         _inputReader = _player.GetComponent<InputReader>();
@@ -18,7 +18,7 @@ public class Bed : MonoBehaviour
     {
         if (_playerInRange && _inputReader.interactPressed)
         {
-            onSleep?.Invoke();
+            timeInstaller.Context.CommandBus.Dispatch(new OnSleepCommand());
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

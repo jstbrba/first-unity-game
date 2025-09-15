@@ -19,7 +19,6 @@ public class TimeController : BaseController<TimeModel, TimeView>
         _nightState = new NightState(this, _model.NightDuration);
 
         _stateMachine.AddTransition(_dayState, _nightState, new FuncPredicate(() => _dayState.IsFinished));
-        // _stateMachine.AddTransition(nightState, dayState, new FuncPredicate(() => nightState.IsFinished));
         _stateMachine.SetState(_dayState);
 
         Context.CommandBus.AddListener<OnSleepCommand>(OnSleepCommand);

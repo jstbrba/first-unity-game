@@ -13,21 +13,23 @@ public class HealthController : BaseController<HealthModel, HealthView>
 
         Context.CommandBus.AddListener<UpgradeMaxHealthCommand>(UpgradeMaxHealth);
         Context.CommandBus.AddListener<ApplyDamageCommand>(ApplyDamage);
+        Context.CommandBus.AddListener<RespawnCommand>(OnRespawn);
     }
-    public void ApplyDamage(ApplyDamageCommand command)
+    private void ApplyDamage(ApplyDamageCommand command)
     {
         _model.CurrentHealth.Value = Mathf.Max(0, _model.CurrentHealth.Value - command.Damage);
     }
-    public void UpgradeMaxHealth(UpgradeMaxHealthCommand command)
+    private void UpgradeMaxHealth(UpgradeMaxHealthCommand command)
     {
         _model.MaxHealth.Value += command.Health;
         _model.CurrentHealth.Value = _model.MaxHealth.Value;
         Debug.Log("Health upgraded to " + _model.MaxHealth.Value);
     }
 
-    public void Model_CurrentHealth_OnValueChanged(int previous, int current)
+    private void Model_CurrentHealth_OnValueChanged(int previous, int current)
     {
         if (_model.CurrentHealth.Value == 0)
             Context.CommandBus.Dispatch(new DeathCommand());
     }
+    private void OnRespawn(RespawnCommand command) => _model.CurrentHealth.Value = _model.MaxHealth.Value;
 }

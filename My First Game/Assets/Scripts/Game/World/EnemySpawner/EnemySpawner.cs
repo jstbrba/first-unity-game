@@ -30,12 +30,13 @@ namespace Game
         {
             spawnTimer += Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.T)) DespawnEnemiesOutOfView(); 
+            if (Input.GetKeyDown(KeyCode.T)) DespawnEnemiesOutOfView();
 
             if (spawnTimer > spawnInterval && !_limitReached)
             {
                 SpawnEnemy();
                 spawnTimer = 0;
+                _model.SpawnCount.Value++; // CHANGE LATER COS THIS CLASS SHOULDN'T BE ALLOWED or not if i cba
             }
         }
         private void SpawnEnemy()

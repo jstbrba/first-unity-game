@@ -55,6 +55,7 @@ namespace Game
             _stateMachine.SetState(_idleState);
 
             _context?.CommandBus.Dispatch(new RespawnCommand());
+            _context?.CommandBus.AddListener<DeathCommand>(HandleDeath);
         }
         private void OnDisable()
         {
@@ -109,12 +110,20 @@ namespace Game
         {
             settings.moneyChannel.Invoke(_moneyOnDeath);
             FlyweightFactory.ReturnToPool(this);
+            NotifySpawner(command);
         }
+        
         public void HealthCheck(int previous, int current)
         {
             _isLowHealth = current < _lowHealthThreshold ? true : false;
         }
         public void Model_Speed_OnValueChanged(float previous, float current) => _movementSpeed = current;
         public void Model_MoneyOnDeath_OnValueChanged(int previous, int current) => _moneyOnDeath = current;
+
+        private void NotifySpawner(ICommand command) 
+        {
+            foreach (var ctx in ContextLocator.Get<EnemySpawnerContext>())
+                ctx.CommandBus.Dispatch(command);
+        }
     }
 }

@@ -40,7 +40,7 @@ public class TimeView : MonoBehaviour, IView
     {
         SetDaytimeText(current);
         SetColour(current);
-        if (!current) _enemySpawner.DespawnEnemiesOutOfView();
+         // if (!current) _enemySpawner.DespawnEnemiesOutOfView();
     }
     private void Model_CanSleep_OnValueChanged(bool previous, bool current)
     {

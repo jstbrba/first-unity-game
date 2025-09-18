@@ -9,7 +9,6 @@ public class EnemySpawnerInstaller : MonoBehaviour
     [SerializeField] private EnemySpawnerView _view;
     private EnemySpawnerController _controller;
 
-    private EnemySpawner _spawner;
     private void Start()
     {
         _context = new EnemySpawnerContext();
@@ -23,8 +22,9 @@ public class EnemySpawnerInstaller : MonoBehaviour
 
         _controller = new EnemySpawnerController(_model, _view);
         _controller.Initialise(_context);
-
-        _spawner = GetComponent<EnemySpawner>();
-        _spawner.Initialise(_context);
+    }
+    private void Update()
+    {
+        _controller.Update(Time.deltaTime);
     }
 }

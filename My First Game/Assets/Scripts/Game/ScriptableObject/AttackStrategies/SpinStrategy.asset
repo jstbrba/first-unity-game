@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationName: SpinAttack
   animHash: -1534487698
-  damage: 1
+  damage: 10
   range: 0
   hitBoxSize: {x: 1.81, y: 1.44}
-  moneyChannel: {fileID: 11400000, guid: 6a75ade36b3d48045bf1c34cfaeb520a, type: 2}

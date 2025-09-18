@@ -7,7 +7,6 @@ public class TimeView : MonoBehaviour, IView
     [SerializeField] private TextMeshProUGUI _dayNightText;
     [SerializeField] private TextMeshProUGUI _dayCounterText;
     [SerializeField] private SpriteRenderer _background;
-    [SerializeField] private EnemySpawner _enemySpawner;
 
     private IContext _context;
     private TimeModel _model;
@@ -40,7 +39,6 @@ public class TimeView : MonoBehaviour, IView
     {
         SetDaytimeText(current);
         SetColour(current);
-         // if (!current) _enemySpawner.DespawnEnemiesOutOfView();
     }
     private void Model_CanSleep_OnValueChanged(bool previous, bool current)
     {

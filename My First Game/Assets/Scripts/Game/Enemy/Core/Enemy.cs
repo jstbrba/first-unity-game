@@ -109,7 +109,7 @@ namespace Game
         public void HandleDeath(DeathCommand command)
         {
             settings.moneyChannel.Invoke(_moneyOnDeath);
-            FlyweightFactory.ReturnToPool(this);
+            Destroy(gameObject);
             NotifySpawner(command);
         }
         
